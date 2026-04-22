@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玉米年度交易建議報告書</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #f3f4f6;
+  --card: #ffffff;
+  --border: #e2e5ea;
+  --text: #1a1f2e;
+  --muted: #6b7280;
+  --green: #059669;
+  --red: #dc2626;
+  --blue: #0066cc;
+  --clr-a: #2563eb;  /* 鈷藍 */
+  --clr-b: #ea580c;  /* 珊瑚橘 */
+  --clr-c: #7c3aed;  /* 靛紫 */
+  --clr-d: #0891b2;  /* 青藍 */
+  --clr-e: #16a34a;  /* 翠綠 */
+  --amber: #d97706;
+  --purple: #7c3aed;
+  --cyan: #0891b2;
+  --gold: #a16207;
+  --teal: #0d9488;
+  --navy: #002855;
+  --accent: #0072ce;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+  background: var(--bg); color: var(--text);
+  padding: 0; line-height: 1.5;
+}
+.page-header {
+  background: var(--navy);
+  padding: 28px 40px 20px;
+  color: #fff;
+}
+.page-header h1 {
+  font-size: 24px; font-weight: 700; letter-spacing: 0.5px;
+  color: #ffffff; margin-bottom: 4px;
+}
+.page-header .subtitle {
+  color: rgba(255,255,255,0.6); font-size: 13px; font-weight: 400;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 0 32px 40px; }
+.tabs {
+  display: flex; gap: 0; background: #fff;
+  border-bottom: 2px solid var(--border);
+  padding: 0 32px; overflow-x: auto;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.tab {
+  padding: 14px 20px; border: none; cursor: pointer;
+  font-size: 13px; font-weight: 600; background: transparent;
+  color: var(--muted); transition: all .15s;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px; white-space: nowrap;
+  font-family: inherit;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.content-area { padding-top: 28px; }
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); } .grid-2 { grid-template-columns: 1fr; } }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 24px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.metric-card .label {
+  color: var(--muted); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.8px; font-weight: 600;
+}
+.metric-card .value { font-size: 22px; font-weight: 700; margin-top: 4px; }
+.metric-card .sub { color: var(--muted); font-size: 11px; margin-top: 2px; }
+.green { color: var(--green); } .red { color: var(--red); } .blue { color: var(--blue); }
+.amber { color: var(--amber); } .purple { color: var(--purple); } .cyan { color: var(--cyan); }
+.clr-a { color: var(--clr-a); font-weight: 700; } .clr-b { color: var(--clr-b); font-weight: 700; } .clr-c { color: var(--clr-c); font-weight: 700; }
+.bg-a { background: var(--clr-a); color: #fff; } .bg-b { background: var(--clr-b); color: #fff; } .bg-c { background: var(--clr-c); color: #fff; }
+.clr-d { color: var(--clr-d); font-weight: 700; } .clr-e { color: var(--clr-e); font-weight: 700; }
+.bg-d { background: var(--clr-d); color: #fff; } .bg-e { background: var(--clr-e); color: #fff; }
+.gold { color: var(--gold); } .teal { color: var(--teal); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  color: var(--muted); text-align: right; padding: 10px 12px;
+  border-bottom: 2px solid var(--border); font-weight: 600; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.3px;
+  background: #f9fafb;
+}
+th:first-child { text-align: left; }
+td {
+  padding: 10px 12px; text-align: right;
+  border-bottom: 1px solid #f0f1f3;
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+}
+td:first-child { text-align: left; }
+tbody tr:hover { background: #f8fafc; }
+.section { display: none; }
+.section.active { display: block; }
+h2 { font-size: 18px; margin-bottom: 16px; color: var(--navy); font-weight: 700; }
+h3 { font-size: 14px; margin-bottom: 10px; color: var(--navy); font-weight: 700; }
+.chart-wrap { position: relative; height: 300px; margin: 16px 0; }
+.note { color: var(--muted); font-size: 12px; line-height: 1.7; margin-top: 10px; }
+.badge {
+  display: inline-block; padding: 2px 10px; border-radius: 4px;
+  font-size: 11px; font-weight: 700;
+}
+.badge-gold { background: #fef3c7; color: #92400e; }
+.badge-silver { background: #f1f5f9; color: #475569; }
+.badge-bronze { background: #fed7aa; color: #9a3412; }
+.badge-green { background: #d1fae5; color: #065f46; }
+.badge-red { background: #fee2e2; color: #991b1b; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+
+/* Calendar */
+.calendar-wrap { margin-bottom: 24px; }
+.calendar {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: 0; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.cal-cell {
+  padding: 12px 4px; text-align: center; font-size: 13px; font-weight: 600;
+  background: #f9fafb; color: #9ca3af;
+  border-right: 1px solid var(--border);
+}
+.cal-cell:last-child { border-right: none; }
+.cal-cell small { display: block; font-size: 10px; font-weight: 500; margin-top: 2px; }
+.cal-short { background: #fef2f2; color: #dc2626; }
+.cal-long { background: #eff6ff; color: #2563eb; }
+.cal-check { background: #f0fdf4; color: #16a34a; }
+.legend { display: flex; gap: 24px; font-size: 12px; color: var(--muted); margin-top: 10px; }
+.legend span { display: flex; align-items: center; gap: 6px; }
+.legend .dot { width: 10px; height: 10px; border-radius: 3px; }
+
+/* Rank cards */
+.rank-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 8px; padding: 20px 24px; margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  transition: box-shadow .15s;
+}
+.rank-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.rank-card.top { border-left: 3px solid var(--accent); }
+.rank-num {
+  display: inline-flex; width: 26px; height: 26px; border-radius: 50%;
+  align-items: center; justify-content: center;
+  font-weight: 800; font-size: 13px; margin-right: 10px; flex-shrink: 0;
+}
+.rank-1 { background: #fef3c7; color: #92400e; }
+.rank-2 { background: #f1f5f9; color: #475569; }
+.rank-3 { background: #fed7aa; color: #9a3412; }
+.rank-4, .rank-5 { background: #f3f4f6; color: #6b7280; }
+.skip-row { /* normal display */ }
+
+/* Info boxes */
+.info-box {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 8px; padding: 20px 24px; margin: 16px 0;
+}
+.info-box.accent { border-left: 3px solid var(--accent); }
+.info-box.warn { border-left: 3px solid var(--amber); }
+.info-box.success { border-left: 3px solid var(--green); }
+.info-box.danger { border-left: 3px solid var(--red); }
+
+.filter-flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+.filter-step {
+  padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  border: 1px solid var(--border);
+}
+.filter-arrow { color: var(--muted); font-size: 16px; }
+.detail-grid { display: grid; grid-template-columns: 180px 1fr; gap: 4px 16px; font-size: 13px; margin: 8px 0; }
+.detail-grid .k { color: var(--muted); }
+.detail-grid .v { font-weight: 600; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.prose { font-size: 14px; line-height: 1.8; color: #374151; }
+.prose strong { color: var(--text); }
+.margin-box {
+  background: #f9fafb; border: 1px solid var(--border);
+  border-radius: 6px; padding: 16px; margin-bottom: 12px;
+}
+.margin-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; }
+.margin-row .lbl { color: var(--muted); }
+.margin-row .val { font-weight: 600; font-variant-numeric: tabular-nums; }
+.corr-bar { display: inline-block; height: 14px; border-radius: 3px; vertical-align: middle; }
+.section-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.2px; color: var(--muted); margin-bottom: 12px;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>玉米期貨年度交易建議報告書</h1>
+  <p class="subtitle">回測期間 2000–2025 ｜ 所有數據單位：點數（1 點 = $50/口）</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab(0)">策略排名</button>
+  <button class="tab" onclick="showTab(1)">做空 ZCU 詳細</button>
+  <button class="tab" onclick="showTab(2)">做多 ZCZ 詳細</button>
+  <button class="tab" onclick="showTab(3)">進階組合策略</button>
+  <button class="tab" onclick="showTab(4)">數據關聯性分析</button>
+  <button class="tab" onclick="showTab(5)">資料來源</button>
+</div>
+
+<div class="container">
+<div class="content-area">
+
+<!-- ======================= TAB 0: 策略排名 ======================= -->
+<div class="section active" id="sec0">
+
+<!-- 總結與投資建議 -->
+<div class="info-box accent" style="margin-bottom:24px;border-left:4px solid var(--green)">
+<h3 style="margin-bottom:10px;font-size:17px">報告總結與投資建議</h3>
+<p class="prose" style="margin-bottom:12px">本報告回測 2000–2025 年共 26 年的玉米期貨季節性交易策略。核心發現：<strong>夏季做空（6–8 月）搭配秋季做多（9–11 月）</strong>的組合策略，在歷史上具有穩定且顯著的正期望值。</p>
+<p class="prose" style="margin-bottom:6px"><strong>積極型：</strong>A + D → 年均 +46.3 pts，涵蓋全部 26 年，追求長期累積報酬。建議資金 $7,200（標準）/ $1,440（微型）。</p>
+<p class="prose" style="margin-bottom:6px"><strong>穩健型：</strong>B + D → 年均 +66.7 pts，做空端全勝，勝率最高。建議資金 $7,200（標準）/ $1,440（微型）。</p>
+<p class="prose" style="margin-bottom:12px"><strong>保守型：</strong>僅使用策略 B → 13 筆交易全勝，完全無回撤。適合剛入門或資金有限者。建議資金 $3,000（標準）/ $600（微型）。</p>
+<p class="prose" style="margin-bottom:0;font-size:12px;color:var(--muted)">⚠ 以上為歷史回測結果，不代表未來績效保證。回測期間涵蓋多種市場環境（含 2008 金融危機、2012 大旱、2020 疫情），但未來仍可能出現歷史未見的極端情況。建議嚴格執行篩選條件，不滿足條件時不交易。</p>
+</div>
+
+<!-- 年度交易時間軸 -->
+<div class="calendar-wrap">
+<p class="section-label">年度交易時間軸</p>
+<div class="calendar">
+<div class="cal-cell">1月</div>
+<div class="cal-cell">2月</div>
+<div class="cal-cell">3月</div>
+<div class="cal-cell">4月</div>
+<div class="cal-cell cal-check">5月<small>篩選</small></div>
+<div class="cal-cell cal-short">6月<small>做空進</small></div>
+<div class="cal-cell cal-short">7月</div>
+<div class="cal-cell cal-short">8月<small>做空出</small></div>
+<div class="cal-cell cal-long">9月<small>做多進</small></div>
+<div class="cal-cell cal-long">10月</div>
+<div class="cal-cell cal-long">11月<small>做多出</small></div>
+<div class="cal-cell">12月</div>
+</div>
+<div class="legend">
+  <span><div class="dot" style="background:#fecaca"></div>做空窗口（ZCU 9月合約）</span>
+  <span><div class="dot" style="background:#bfdbfe"></div>做多窗口（ZCZ 12月合約）</span>
+  <span><div class="dot" style="background:#bbf7d0"></div>指標篩選期</span>
+</div>
+</div>
+
+<h2>策略總排名 Top 5</h2>
+
+<!-- 排名對照表 (moved before cards) -->
+<div class="card" style="margin-bottom:24px">
+<h3>全策略績效對照（依勝率排序）</h3>
+<table>
+<thead><tr><th style="text-align:left">排名</th><th style="text-align:left">策略</th><th>交易數</th><th>勝率</th><th>平均 pts</th></tr></thead>
+<tbody id="rank_table"></tbody>
+</table>
+</div>
+
+<!-- 各策略進出場條件 -->
+<div class="card" style="margin-bottom:24px">
+<h3>各策略條件說明</h3>
+<table>
+<thead><tr><th style="text-align:left">策略</th><th style="text-align:left">方向 / 合約</th><th style="text-align:left">持倉期間</th><th style="text-align:left">進場篩選條件</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:700;text-align:left">A</td><td style="text-align:left">做空 ZCU（9月）</td><td style="text-align:left">6/2 → 8/15</td><td style="text-align:left">水份短缺<sup>[1]</sup> ≤ 35% <strong>且</strong> 作物優良率 G+E<sup>[2]</sup> ≥ 60%</td></tr>
+<tr><td style="font-weight:700;text-align:left">B</td><td style="text-align:left">做空 ZCU（9月）</td><td style="text-align:left">6/2 → 8/15</td><td style="text-align:left">A 的條件 <strong>且</strong> COT 避險倉淨部位<sup>[3]</sup> ≤ 0（實體端偏空）</td></tr>
+<tr><td style="font-weight:700;text-align:left">C</td><td style="text-align:left">做空 ZCU（9月）</td><td style="text-align:left">6/2 → 8/15</td><td style="text-align:left">A 的條件 <strong>且</strong> COT 投機倉淨部位<sup>[4]</sup> ≥ 0（投機端仍偏多）</td></tr>
+<tr><td style="font-weight:700;text-align:left">D</td><td style="text-align:left">做多 ZCZ（12月）</td><td style="text-align:left">9/1 → 11/1</td><td style="text-align:left">7–8 月 UP 車廂溢價<sup>[5]</sup>均值 > +50</td></tr>
+<tr><td style="font-weight:700;text-align:left">E</td><td style="text-align:left">做多 ZCZ（12月）</td><td style="text-align:left">9/1 → 11/1</td><td style="text-align:left">7–8 月 UP 車廂溢價<sup>[5]</sup>均值 > 0 <strong>或</strong> 8 月底全國作物優良率 G+E<sup>[2]</sup> > 65%</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 附註：名詞說明 -->
+<div class="info-box warn" style="margin-top:24px">
+<p class="section-label" style="margin-bottom:10px">附註：篩選指標名詞說明</p>
+<div style="display:grid;grid-template-columns:40px 1fr;gap:6px 12px;font-size:13px;line-height:1.8">
+<span style="color:var(--amber);font-weight:700">[1]</span><span><strong>水份短缺%（Subsoil Moisture Short + Very Short）</strong>— 每週一下午發布的底層土壤水分報告（生長季 4–11 月），取 5 月底最後一期數據。僅採用 <strong>Iowa (IA)</strong> 與 <strong>Illinois (IL)</strong> 兩州：2000–2012 年僅用 IA（IL 無 5 月數據），2013–2025 年用 IA + IL 均值。「短缺+極短缺」合計百分比越高代表越乾旱。乾旱年做空玉米風險極大（價格飆漲），因此做空策略要求此值 ≤ 35%。〔資料來源：USDA NASS Crop Progress〕</span>
+<span style="color:var(--amber);font-weight:700">[2]</span><span><strong>作物優良率G+E（Good/Excellent）</strong>— 每週一下午發布的全國玉米作物狀況評級（生長季 4–11 月），取「Good + Excellent」合計百分比。數值越高代表作物生長越好、供應充足，有利做空。做空策略要求 ≥ 60%；做多涵蓋版以 > 65% 為觸發條件之一。〔資料來源：USDA NASS Crop Progress〕</span>
+<span style="color:var(--amber);font-weight:700">[3]</span><span><strong>COT避險倉淨部位（Commercial Net Position）</strong>— 每週五下午發布（反映當週二持倉）的承諾交易人報告（COT），取「COT避險倉」多頭減空頭合約數。COT避險倉 = 實體買家/賣家（如 ADM、Cargill 等穀物商）。淨部位 ≤ 0 代表實體端在鎖定賣價，認為價格偏高，有利做空。〔資料來源：CFTC Commitments of Traders Report〕</span>
+<span style="color:var(--amber);font-weight:700">[4]</span><span><strong>COT投機倉淨部位（Non-Commercial Net Position）</strong>— 每週五下午發布（反映當週二持倉），COT 報告中「非商業交易者」（投機基金、對沖基金）的多頭減空頭。淨部位 ≥ 0 代表COT投機倉仍看多，多頭平倉壓力大，做空獲利空間充足。〔資料來源：CFTC Commitments of Traders Report〕</span>
+<span style="color:var(--amber);font-weight:700">[5]</span><span><strong>TAM 車廂溢價（Railcar Bid Premium）</strong>— 每週四發布的鐵路穀物運輸市場近月車廂標購溢價（相對於 Tariff 基準價的加減碼）。溢價高代表運輸需求緊張、現貨基差強勁，有利做多。精準版門檻 > +50，涵蓋版門檻 > 0。〔資料來源：USDA AMS Grain Transportation Report〕</span>
+</div>
+</div>
+</div>
+
+<!-- ======================= TAB 1: S1 詳細 ======================= -->
+<div class="section" id="sec1">
+<h2>做空 ZCU 6/2→8/15 詳細分析（策略 A / B / C 共用）</h2>
+
+<div class="info-box accent">
+<h3>交易邏輯</h3>
+<p class="prose">每年 6 月 2 日做空 9 月玉米期貨（ZCU），8 月 15 日平倉。利用夏季玉米播種完成後的季節性下跌趨勢獲利。入場前以 <strong>土壤含水量</strong>（USDA Subsoil Moisture Short/V.Short%）與 <strong>作物優良率</strong>（USDA Corn Condition Good+Excellent%）乾旱篩選，排除乾旱年份（做空虧損風險極高）。若 Crop Condition 報告尚未發布（播種延遲年份），則等待報告發布後隔日再決定是否入場。</p>
+</div>
+
+<h3 style="margin-top:20px">篩選流程</h3>
+<div class="filter-flow">
+<div class="filter-step" style="background:#fefce8;color:#a16207;border-color:#fde68a">5月底 USDA 土壤水分</div>
+<span class="filter-arrow">→</span>
+<div class="filter-step" style="background:#fef2f2;color:#dc2626;border-color:#fecaca">短缺+極短缺 > 35% → 不做空</div>
+<span class="filter-arrow">→</span>
+<div class="filter-step" style="background:#fefce8;color:#a16207;border-color:#fde68a">5月底 USDA 全國 作物優良率G+E</div>
+<span class="filter-arrow">→</span>
+<div class="filter-step" style="background:#fef2f2;color:#dc2626;border-color:#fecaca">作物優良率G/E < 60% → 不做空</div>
+<span class="filter-arrow">→</span>
+<div class="filter-step" style="background:#f0fdf4;color:#059669;border-color:#bbf7d0">執行做空</div>
+</div>
+
+<h3 style="margin-top:20px">可選加強篩選：CFTC COT避險倉淨部位</h3>
+<div class="filter-flow">
+<div class="filter-step" style="background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe">5月末 CFTC COT 報告</div>
+<span class="filter-arrow">→</span>
+<div class="filter-step" style="background:#fef2f2;color:#dc2626;border-color:#fecaca">COT避險倉淨部位 > 0（淨多頭）→ 不做空</div>
+<span class="filter-arrow">→</span>
+<div class="filter-step" style="background:#f0fdf4;color:#059669;border-color:#bbf7d0">執行做空</div>
+</div>
+<p class="prose" style="margin-top:8px">邏輯：COT避險倉淨多頭 = 實體買家認為價格偏低 → 不利做空。淨空頭 = 實體賣家在鎖定高價 → 有利做空。相關係數 r = -0.461（強負相關）。加入此篩選後策略 B 達到 13 筆全勝，但樣本較少，需持續驗證。</p>
+
+<!-- 策略 A / B / C 比較 -->
+<div class="card" style="margin-top:20px">
+<h3>策略 A / B / C 績效比較</h3>
+<table>
+<thead><tr><th style="text-align:left">指標</th><th><span class="clr-a" style="font-size:13px">策略 A</span><br><span style="font-size:11px;font-weight:400;color:var(--muted)">乾旱篩選</span></th><th><span class="clr-b" style="font-size:13px">策略 B</span><br><span style="font-size:11px;font-weight:400;color:var(--muted)">+COT避險倉</span></th><th><span class="clr-c" style="font-size:13px">策略 C</span><br><span style="font-size:11px;font-weight:400;color:var(--muted)">+COT投機倉</span></th></tr></thead>
+<tbody id="s1_perf"></tbody>
+</table>
+</div>
+
+<!-- S1 逐年 -->
+<div class="card" style="margin-top:20px">
+<h3>逐年明細</h3>
+<table>
+<thead><tr><th style="text-align:left">年份</th><th>進場</th><th>出場</th><th>損益 (pts)</th><th>最大浮虧(MAE)</th><th>土壤%</th><th>G+E</th><th>COT避險倉</th><th>COT投機倉</th><th>策略進場</th></tr></thead>
+<tbody id="s1_detail"></tbody>
+</table>
+</div>
+
+<hr style="margin:32px 0 8px;border:none;border-top:2px solid var(--border)">
+<h3 style="color:var(--muted);font-size:14px;letter-spacing:1px;margin-bottom:16px">原始數據</h3>
+
+<div class="card">
+<h3>土壤含水量原始數據（USDA NASS Subsoil Moisture — 5月最末週）</h3>
+<p class="note" style="margin-bottom:12px">Short = 短缺%、Very Short = 極短缺%。報告中「土壤%」僅採用 <strong>Iowa (IA)</strong> 與 <strong>Illinois (IL)</strong> 兩州。<span style="color:var(--amber);font-weight:600">2000–2012 年僅用 IA</span>（IL 5月數據自 2012 起才有，但為統一方法 2013 起才納入），<span style="color:var(--accent);font-weight:600">2013–2025 年用 IA + IL 均值</span>。資料來源：USDA NASS Crop Progress。</p>
+<table>
+<thead><tr><th style="text-align:left">年份</th><th style="text-align:left">報告日期</th><th style="text-align:center">期間</th><th>IA Short</th><th>IA V.Short</th><th>IA 合計</th><th>IL Short</th><th>IL V.Short</th><th>IL 合計</th><th>土壤%</th></tr></thead>
+<tbody id="soil_detail"></tbody>
+</table>
+</div>
+
+<div class="card" style="margin-top:20px">
+<h3>作物優良率原始數據（USDA NASS Crop Progress — 全國玉米 Condition）</h3>
+<p class="note" style="margin-bottom:12px">取每年 5 月底最後一週報告（若 5 月無數據則取 6 月第一週）。USDA Crop Progress 於每週一下午 4:00 ET 發布。做空進場日原則為 6/2；若該年 Crop Condition 尚未發布（播種延遲），則<span style="color:var(--amber);font-weight:600">等待報告發布後隔日入場</span>，並以當日開盤價為進場價。原始檔案：USDA_CropCondition_National_2000-2025.csv</p>
+<table>
+<thead><tr><th style="text-align:left">年份</th><th style="text-align:left">報告日期</th><th>V.Poor%</th><th>Poor%</th><th>Fair%</th><th>Good%</th><th>Excellent%</th><th>G+E</th><th>入場日</th></tr></thead>
+<tbody id="ge_detail"></tbody>
+</table>
+</div>
+
+<div class="card" style="margin-top:20px">
+<h3>COT 持倉原始數據（CFTC Commitments of Traders — 5月最後一個週五報告）</h3>
+<p class="note" style="margin-bottom:12px">取每年 5 月最後一個週五發布的 COT 報告（反映當週二收盤持倉），確保數據在 6/2 進場前已公開。避險倉 = Commercial（穀物商），投機倉 = Non-Commercial（基金）。淨部位 = 多頭 − 空頭合約數。正值 = 淨多頭，負值 = 淨空頭。〔資料來源：CFTC Commitments of Traders Report〕</p>
+<table>
+<thead><tr><th style="text-align:left">年份</th><th>報告日期</th><th>避險倉淨部位</th><th>投機倉淨部位</th><th style="text-align:center"><span class="clr-b">B 篩選</span></th><th style="text-align:center"><span class="clr-c">C 篩選</span></th></tr></thead>
+<tbody id="cot_detail"></tbody>
+</table>
+</div>
+
+</div>
+
+<!-- ======================= TAB 2: 做多 ZCZ 詳細 ======================= -->
+<div class="section" id="sec2">
+<h2>做多 ZCZ 9/1→11/1 詳細分析（策略 D / E）</h2>
+
+<div class="info-box accent">
+<h3>交易邏輯</h3>
+<p class="prose">每年 9 月 1 日做多 12 月玉米期貨（ZCZ），11 月 1 日平倉。利用秋收季的運輸瓶頸與基差收斂獲利。以 <strong>UP 鐵路車廂溢價</strong>（Union Pacific Railcar Bid Premium）與 <strong>全國作物優良率 G+E</strong> 作為篩選指標。策略 D（精準版）僅在 UP 車廂溢價 > +50 時進場，篩選嚴格但命中率高；策略 E（涵蓋版）放寬至溢價 > 0 或 G/E > 65%，增加交易機會但承擔較高 MDD。<br><small style="color:var(--muted)">※ 車廂溢價僅採用 Union Pacific 報價（r=0.573），優於合併 BNSF+UP（r=0.519）。2004/2005 年無近月資料，以全部報價補上。</small></p>
+</div>
+
+<h3 style="margin-top:20px">篩選流程</h3>
+<p class="note" style="margin-bottom:12px">策略 D 與 E 使用相同方向（做多 ZCZ），差異僅在篩選門檻寬嚴。</p>
+
+<div style="display:flex;gap:24px;flex-wrap:wrap">
+<div style="flex:1;min-width:280px">
+<h4 style="margin-bottom:8px"><span class="clr-d">策略 D（精準版）</span></h4>
+<div class="filter-flow">
+<div class="filter-step" style="background:#ecfeff;color:#0891b2;border-color:#a5f3fc">7-8月 TAM 車廂溢價均值</div>
+<span class="filter-arrow">&rarr;</span>
+<div class="filter-step" style="background:#f0fdf4;color:#059669;border-color:#bbf7d0">溢價 > +50 &rarr; 做多</div>
+<span class="filter-arrow">&rarr;</span>
+<div class="filter-step" style="background:#fef2f2;color:#dc2626;border-color:#fecaca">否 &rarr; 不交易</div>
+</div>
+</div>
+<div style="flex:1;min-width:280px">
+<h4 style="margin-bottom:8px"><span class="clr-e">策略 E（涵蓋版）</span></h4>
+<div class="filter-flow">
+<div class="filter-step" style="background:#f0fdf4;color:#16a34a;border-color:#86efac">7-8月 車廂溢價 OR 作物G+E</div>
+<span class="filter-arrow">&rarr;</span>
+<div class="filter-step" style="background:#f0fdf4;color:#059669;border-color:#bbf7d0">溢價 > 0 或 G/E > 65% &rarr; 做多</div>
+<span class="filter-arrow">&rarr;</span>
+<div class="filter-step" style="background:#fef2f2;color:#dc2626;border-color:#fecaca">皆否 &rarr; 不交易</div>
+</div>
+</div>
+</div>
+
+<!-- 策略 D / E 績效比較 -->
+<div class="card" style="margin-top:20px">
+<h3>策略 D / E 績效比較</h3>
+<table>
+<thead><tr><th style="text-align:left">指標</th><th><span class="clr-d" style="font-size:13px">策略 D</span><br><span style="font-size:11px;font-weight:400;color:var(--muted)">精準版（車廂>+50）</span></th><th><span class="clr-e" style="font-size:13px">策略 E</span><br><span style="font-size:11px;font-weight:400;color:var(--muted)">涵蓋版（車廂>0 或 G+E>65%）</span></th></tr></thead>
+<tbody id="s2_perf"></tbody>
+</table>
+</div>
+
+<!-- 逐年明細 -->
+<div class="card" style="margin-top:20px">
+<h3>逐年明細</h3>
+<table>
+<thead><tr><th style="text-align:left">年份</th><th>進場</th><th>出場</th><th>損益 (pts)</th><th>最大浮虧(MAE)</th><th>車廂溢價</th><th>作物G+E</th><th>策略進場</th></tr></thead>
+<tbody id="s2_detail"></tbody>
+</table>
+</div>
+
+<p class="note" style="margin-top:12px">策略 D 無法有效被 COT、ONI、WASDE 等額外指標加強。測試中所有指標對做多策略的相關性均低於 &plusmn;0.25。鐵路車廂溢價仍是做多策略最佳也是唯一有效篩選指標。</p>
+
+<hr style="margin:32px 0 8px;border:none;border-top:2px solid var(--border)">
+<h3 style="color:var(--muted);font-size:14px;letter-spacing:1px;margin-bottom:16px">原始數據</h3>
+
+<div class="card">
+<h3>TAM 車廂溢價原始數據（USDA AMS Grain Transportation Report — 7-8月均值）</h3>
+<p class="note" style="margin-bottom:12px">車廂溢價 = 鐵路穀物運輸市場近月車廂標購溢價，相對於 Tariff 基準價的加減碼。正值代表運輸需求緊張。取每年 7-8 月報告均值作為篩選依據。〔資料來源：USDA AMS Grain Transportation Report〕</p>
+<table>
+<thead><tr><th style="text-align:left">年份</th><th>車廂溢價均值</th><th style="text-align:center"><span class="clr-d">D 篩選</span></th><th style="text-align:center"><span class="clr-e">E 篩選</span></th></tr></thead>
+<tbody id="rc_detail"></tbody>
+</table>
+</div>
+
+<div class="card" style="margin-top:20px">
+<h3>作物優良率原始數據（USDA NASS — 做多篩選用）</h3>
+<p class="note" style="margin-bottom:12px">策略 E 的第二篩選條件：全國玉米 G+E > 65% 即觸發做多。此處列出各年 8 月底 G+E 供參考。</p>
+<table>
+<thead><tr><th style="text-align:left">年份</th><th>Good%</th><th>Excellent%</th><th>G+E</th><th style="text-align:center"><span class="clr-e">E 觸發</span></th></tr></thead>
+<tbody id="ge_long_detail"></tbody>
+</table>
+</div>
+
+</div>
+
+<!-- ======================= TAB 3: 策略組合 ======================= -->
+<div class="section" id="sec3">
+<h2>進階組合策略</h2>
+
+<div class="info-box success">
+<h3>為什麼做空 + 做多可以組合？</h3>
+<p class="prose">做空（6/2→8/15）與做多（9/1→11/1）<strong>交易窗口完全不重疊</strong>，一年之中先做空夏季、再做多秋季。兩段策略使用不同月份合約（ZCU vs ZCZ），不佔用同一保證金，資金效率最高。在同一年內可依序執行兩次操作，不增加最大曝險。</p>
+</div>
+
+<!-- 組合比較表 -->
+<div class="card" style="margin-top:20px">
+<h3>四種組合績效比較</h3>
+<table>
+<thead><tr><th style="text-align:left">組合</th><th>年度數</th><th>年均 pts</th><th>勝率</th><th>建議保證金</th></tr></thead>
+<tbody id="combo_compare"></tbody>
+</table>
+</div>
+
+</div>
+
+<!-- ======================= TAB 4: 數據關聯性分析 ======================= -->
+<div class="section" id="sec4">
+<h2>數據關聯性分析</h2>
+
+<div class="info-box accent">
+<p class="prose">本頁整理所有測試過的篩選指標與策略損益的相關性。已採用的指標作為策略進場條件，未採用的指標因相關性不足而排除，但保留數據供未來研究參考。</p>
+</div>
+
+<!-- 相關性總表 -->
+<div class="card" style="margin-top:20px">
+<h3>相關係數總覽（指標 vs 策略損益）</h3>
+<table>
+<thead><tr><th style="text-align:left">指標</th><th>資料來源</th><th>時間點</th><th>vs 做空 r</th><th>強度</th><th>vs 做多 r</th><th>強度</th><th>採用方式</th></tr></thead>
+<tbody style="border-top:3px solid var(--green)">
+<tr><td colspan="8" style="font-weight:700;background:var(--bg2);padding:6px 12px;font-size:12px;letter-spacing:1px">已採用 — 做空篩選指標</td></tr>
+<tr><td style="font-weight:600">水份短缺% (IA+IL)</td><td>USDA NASS</td><td>5 月底</td><td>+0.105</td><td><span class="badge badge-red">弱</span></td><td>—</td><td>—</td><td>二元門檻 ≤ 35%（策略 A/B/C）</td></tr>
+<tr><td style="font-weight:600">作物優良率 G+E</td><td>USDA NASS</td><td>5 月底</td><td>-0.104</td><td><span class="badge badge-red">弱</span></td><td>—</td><td>—</td><td>二元門檻 ≥ 60%（策略 A/B/C）</td></tr>
+<tr><td style="font-weight:600">COT 避險倉淨部位</td><td>CFTC</td><td>5 月底</td><td>-0.461</td><td><span class="badge badge-gold">強</span></td><td>-0.288</td><td><span class="badge badge-silver">中等</span></td><td>≤ 0 才做空（策略 B）</td></tr>
+<tr><td style="font-weight:600">COT 投機倉淨部位</td><td>CFTC</td><td>5 月底</td><td>+0.413</td><td><span class="badge badge-gold">強</span></td><td>+0.197</td><td><span class="badge badge-red">弱</span></td><td>≥ 0 才做空（策略 C）</td></tr>
+<tr><td colspan="8" style="font-weight:700;background:var(--bg2);padding:6px 12px;font-size:12px;letter-spacing:1px;border-top:3px solid var(--blue)">已採用 — 做多篩選指標</td></tr>
+<tr><td style="font-weight:600">TAM UP 車廂溢價</td><td>USDA AMS</td><td>7–8 月均值</td><td>+0.032</td><td><span class="badge badge-red">極弱</span></td><td>+0.524</td><td><span class="badge badge-gold">強</span></td><td>> +50（策略 D）/ > 0（策略 E）</td></tr>
+<tr><td style="font-weight:600">作物優良率 G+E</td><td>USDA NASS</td><td>8 月底</td><td>—</td><td>—</td><td>+0.560</td><td><span class="badge badge-gold">強</span></td><td>> 65% 觸發做多（策略 E）</td></tr>
+<tr><td colspan="8" style="font-weight:700;background:var(--bg2);padding:6px 12px;font-size:12px;letter-spacing:1px;border-top:3px solid var(--muted)">未採用 — 相關性不足</td></tr>
+<tr><td>ONI 聖嬰指數 (AMJ)</td><td>NOAA CPC</td><td>4–6 月</td><td>+0.007</td><td><span class="badge badge-red">極弱</span></td><td>—</td><td>—</td><td>不推薦</td></tr>
+<tr><td>ONI 聖嬰指數 (JJA)</td><td>NOAA CPC</td><td>6–8 月</td><td>—</td><td>—</td><td>-0.139</td><td><span class="badge badge-red">弱</span></td><td>不推薦</td></tr>
+<tr><td>WASDE 5月期末庫存</td><td>USDA</td><td>5 月報告</td><td>-0.027</td><td><span class="badge badge-red">極弱</span></td><td>+0.232</td><td><span class="badge badge-red">弱</span></td><td>不推薦（N 僅 13）</td></tr>
+<tr><td>駁船費率</td><td>USDA AMS</td><td>4–5 月均值</td><td>-0.160</td><td><span class="badge badge-red">弱</span></td><td>—</td><td>—</td><td>不推薦</td></tr>
+</tbody>
+</table>
+<p class="note">相關係數 |r| < 0.1 為極弱，0.1–0.25 為弱，0.25–0.4 為中等，> 0.4 為強。水份短缺%和作物優良率的線性相關係數偏低，是因為它們作為「二元門檻」篩選使用（排除極端年份），而非作為連續預測變數。門檻篩選的價值在於避開災難性虧損（如 2012 年乾旱 -259 pts），無法用線性相關係數完整衡量。</p>
+</div>
+
+<!-- 逐指標詳細 -->
+<div class="card" style="margin-top:20px">
+<h3>土壤水分指標：為什麼只用 Iowa + Illinois？</h3>
+<p class="prose" style="margin-bottom:12px">USDA 土壤水分報告涵蓋多個玉米帶州別。我們逐州測試了 5 月底 Subsoil Moisture（Short + Very Short）與做空損益的相關性：</p>
+<table>
+<thead><tr><th style="text-align:left">州別</th><th>可用期間</th><th>樣本數</th><th>vs 做空 r</th><th>方向合理性</th><th>結論</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:600">Iowa (IA)</td><td>2000–2025</td><td>26</td><td>-0.122</td><td>合理（旱↑ → 做空虧損↑）</td><td style="font-weight:600">採用</td></tr>
+<tr><td style="font-weight:600">Illinois (IL)</td><td>2012–2025</td><td>14</td><td>-0.544</td><td>合理（旱↑ → 做空虧損↑）</td><td style="font-weight:600">採用（2013 起）</td></tr>
+<tr><td>Nebraska (NE)</td><td>2000–2025</td><td>26</td><td>+0.109</td><td>不合理（方向相反）</td><td>排除</td></tr>
+<tr><td>Minnesota (MN)</td><td>2013–2025</td><td>13</td><td>+0.289</td><td>不合理（方向相反）</td><td>排除</td></tr>
+</tbody>
+</table>
+<p class="prose" style="margin-top:10px"><strong>排除 Nebraska / Minnesota 的原因：</strong>這兩州的土壤水分與做空損益的方向與預期相反。Nebraska 為全美灌溉面積第一的州，乾旱對其玉米產量影響較小；Minnesota 地理位置偏北，與核心玉米帶的氣候模式不完全同步。Iowa 和 Illinois 位於玉米帶核心，合計佔全美玉米產量約 30%，其土壤水分對期貨價格影響最直接。</p>
+</div>
+
+<div class="card" style="margin-top:20px">
+<h3>車廂溢價：UP vs BNSF 鐵路比較</h3>
+<p class="prose" style="margin-bottom:12px">TAM 車廂標購市場有三家鐵路公司（UP、BNSF、CPKC）。我們比較了 UP 與 BNSF 各自的 7–8 月溢價與做多 ZCZ 損益的相關性：</p>
+<table>
+<thead><tr><th style="text-align:left">鐵路</th><th>vs 做多 ZCZ r</th><th>樣本數</th><th>結論</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:600">UP（Union Pacific）</td><td style="font-weight:700">+0.526</td><td>22 年（2004–2025）</td><td style="font-weight:600">採用 — 相關性最高</td></tr>
+<tr><td>BNSF</td><td>+0.409</td><td>22 年（2004–2025）</td><td>較弱，未採用</td></tr>
+<tr><td>合併（UP+BNSF）</td><td>+0.467</td><td>22 年（2004–2025）</td><td>混合後反而稀釋</td></tr>
+</tbody>
+</table>
+<p class="prose" style="margin-top:10px"><strong>採用 UP 的原因：</strong>UP 的路網覆蓋中西部玉米帶核心產區（Iowa、Nebraska、Illinois），其車廂溢價更直接反映產區現貨供需緊張程度。BNSF 路網偏向西部和北部（Montana、North Dakota），穀物運輸中混合了較多小麥和其他作物的需求，對玉米基差的代表性較低。兩家在多數年份方向一致，但在關鍵分歧年份（如 2021、2022），UP 的訊號更準確：</p>
+<table style="margin-top:12px;font-size:12px">
+<thead><tr><th>年份</th><th>UP 溢價</th><th>BNSF 溢價</th><th>ZCZ 損益</th><th>備註</th></tr></thead>
+<tbody>
+<tr><td>2021</td><td>+80</td><td class="red">-95</td><td class="green">+33.2 pts</td><td>UP 正確看多，BNSF 方向錯誤</td></tr>
+<tr><td>2022</td><td>+299</td><td>+11</td><td class="green">+19.0 pts</td><td>UP 強烈看多，BNSF 訊號極弱</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card" style="margin-top:20px">
+<h3>COT 避險倉淨部位 — 策略 B 篩選條件</h3>
+<div class="detail-grid">
+<span class="k">資料頻率</span><span class="v">每週五公布（反映週二持倉）</span>
+<span class="k">前瞻偏差</span><span class="v">安全 — 6/2 入場前已有多週報告</span>
+<span class="k">vs 做空 相關</span><span class="v">r = -0.461（強負相關：避險倉淨空越大，做空獲利越高）</span>
+<span class="k">門檻</span><span class="v">COT 避險倉淨部位 > 0 → 跳過做空</span>
+<span class="k">效果</span><span class="v">WR 85.7%→100%, MDD 45→0（策略 B = 13 筆全勝）</span>
+<span class="k">注意</span><span class="v">樣本從 21 降至 13，統計顯著性需持續驗證</span>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>COT 投機倉淨部位 — 策略 C 篩選條件</h3>
+<div class="detail-grid">
+<span class="k">vs 做空 相關</span><span class="v">r = +0.413（強正相關：投機倉淨多越大，做空獲利越高）</span>
+<span class="k">門檻</span><span class="v">COT 投機倉淨部位 < 0 → 跳過（投機倉已淨空 → 下跌空間有限）</span>
+<span class="k">效果</span><span class="v">WR 85.7%→93.3%（策略 C = 15 筆中 14 勝）</span>
+<span class="k">解讀</span><span class="v">投機倉淨多時，多頭平倉潛力大 → 夏季做空獲利空間充足</span>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>ONI 聖嬰指數 — 未採用</h3>
+<div class="detail-grid">
+<span class="k">vs 做空 (AMJ)</span><span class="v">r = +0.007（本質上無相關）</span>
+<span class="k">vs 做多 (JJA)</span><span class="v">r = -0.139（弱）</span>
+<span class="k">測試結果</span><span class="v">AMJ≤0 跳過：N 從 21 降至 8，雖 MDD 改善但樣本過少</span>
+<span class="k">結論</span><span class="v">ENSO 對美國玉米帶影響的時間路徑不穩定，不適合做年度篩選</span>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>WASDE 期末庫存 — 未採用</h3>
+<div class="detail-grid">
+<span class="k">vs 做空</span><span class="v">r = -0.027（接近零）</span>
+<span class="k">vs 做多</span><span class="v">r = +0.232（弱偏中等，但 N 僅 13）</span>
+<span class="k">問題</span><span class="v">可用資料僅 2010–2022（13 年），統計效力不足</span>
+<span class="k">結論</span><span class="v">5 月期末庫存已反映在期貨定價中，邊際預測力近零</span>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>駁船費率 — 未採用</h3>
+<div class="detail-grid">
+<span class="k">vs 做空</span><span class="v">r = -0.160（弱）</span>
+<span class="k">測試範圍</span><span class="v">4–5 月均值，門檻 150–500%</span>
+<span class="k">結論</span><span class="v">駁船費率反映密西西比河運輸條件，與夏季做空邏輯無直接因果關係</span>
+</div>
+</div>
+
+</div>
+
+<!-- ======================= TAB 6: 資料來源 ======================= -->
+<div class="section" id="sec5">
+<h2>資料來源 Citations</h2>
+
+<div class="info-box accent">
+<p class="prose">以下為本報告所有回測數據與篩選指標的原始資料來源。所有數據均為公開資料，可自行下載驗證。</p>
+</div>
+
+<div class="card" style="margin-top:20px">
+<h3 style="color:var(--green)">價格數據</h3>
+<div style="font-size:13px;line-height:2.2">
+<div style="display:grid;grid-template-columns:200px 1fr;gap:4px 16px">
+<span style="color:var(--muted)">ZCU 9月玉米期貨</span><span>CBOT Corn Futures, September Contract (ZCU), Daily Settlement, 2000–2025</span>
+<span style="color:var(--muted)">ZCZ 12月玉米期貨</span><span>CBOT Corn Futures, December Contract (ZCZ), Daily Settlement, 2000–2025</span>
+<span style="color:var(--muted)">下載來源</span><span><a href="https://www.barchart.com/futures/quotes/ZCU00/historical-download" style="color:var(--accent)" target="_blank">Barchart.com</a> — Historical Download（Futures → Corn → Historical Prices）</span>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3 style="color:var(--amber)">土壤水分 & 作物狀況（做空篩選）</h3>
+<div style="font-size:13px;line-height:2.2">
+<div style="display:grid;grid-template-columns:200px 1fr;gap:4px 16px">
+<span style="color:var(--muted)">土壤水分報告</span><span>USDA NASS — Crop Progress & Condition Report, Subsoil Moisture (Short + Very Short %), Weekly</span>
+<span style="color:var(--muted)">作物優良率G+E</span><span>USDA NASS — Crop Progress & Condition Report, Corn Condition (Good + Excellent %), Weekly</span>
+<span style="color:var(--muted)">下載方式</span><span><a href="https://usda.library.cornell.edu/concern/publications/8336h188j" style="color:var(--accent)" target="_blank">USDA NASS Quick Stats</a> 或 <a href="https://www.nass.usda.gov/Publications/Todays_Reports/" style="color:var(--accent)" target="_blank">Today's Reports</a></span>
+<span style="color:var(--muted)">取用時間點</span><span>每年 5 月底最後一期報告（6/2 做空進場前已公布）</span>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3 style="color:var(--purple)">CFTC COT 持倉報告（做空 COT 篩選）</h3>
+<div style="font-size:13px;line-height:2.2">
+<div style="display:grid;grid-template-columns:200px 1fr;gap:4px 16px">
+<span style="color:var(--muted)">報告類型</span><span>Commitments of Traders — Legacy Report, Futures Only</span>
+<span style="color:var(--muted)">商品</span><span>CORN — CHICAGO BOARD OF TRADE</span>
+<span style="color:var(--muted)">欄位</span><span>Commercial Long/Short、Non-Commercial Long/Short、Open Interest</span>
+<span style="color:var(--muted)">下載方式</span><span><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm" style="color:var(--accent)" target="_blank">CFTC Historical Compressed</a> → Futures Only Reports</span>
+<span style="color:var(--muted)">取用時間點</span><span>每週五公布（反映週二持倉），6/1 前最近一期用於 6/2 進場判斷</span>
+<span style="color:var(--muted)">本報告使用檔案</span><span>Fut_2000-2003.xls、annual2004-2026.xls（過濾 OI > 100,000 排除迷你合約）</span>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3 style="color:var(--blue)">TAM 鐵路車廂溢價（做多篩選）</h3>
+<div style="font-size:13px;line-height:2.2">
+<div style="display:grid;grid-template-columns:200px 1fr;gap:4px 16px">
+<span style="color:var(--muted)">資料名稱</span><span>USDA AMS — Grain Transportation Report, Rail Car Bids (Secondary Railcar Market)</span>
+<span style="color:var(--muted)">指標</span><span>Union Pacific Railcar Bid Premium（美元/車廂），近月優先混合法</span>
+<span style="color:var(--muted)">下載方式</span><span><a href="https://www.ams.usda.gov/services/transportation-analysis/gtr" style="color:var(--accent)" target="_blank">USDA AMS Grain Transportation Report</a></span>
+<span style="color:var(--muted)">取用時間點</span><span>7-8 月均值，8 月中前已全部公布，供 9/1 做多進場判斷</span>
+<span style="color:var(--muted)">為何選 UP</span><span>UP 車廂溢價與 ZCZ 損益相關性 r=0.573，高於 BNSF（r=0.419）及兩者合併（r=0.519）。UP 路線連接中西部玉米帶至墨西哥灣出口港，與冬季合約定價更直接相關。</span>
+<span style="color:var(--muted)">混合法說明</span><span>優先使用 Near-Month Indicator=true 的報價；2004/2005 年無近月資料，改用全部報價補上。</span>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>低相關指標（已測試但未採用）</h3>
+<div style="font-size:13px;line-height:2.2">
+<div style="display:grid;grid-template-columns:200px 1fr;gap:4px 16px">
+<span style="color:var(--muted)">ONI 聖嬰指數</span><span>NOAA CPC — Oceanic Niño Index (ONI), 3-month running mean of SST anomalies in Niño 3.4 region<br><a href="https://origin.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php" style="color:var(--accent)" target="_blank">CPC ONI Data</a></span>
+<span style="color:var(--muted)">WASDE 期末庫存</span><span>USDA OCE — World Agricultural Supply and Demand Estimates, May Report, U.S. Corn Ending Stocks<br><a href="https://www.usda.gov/oce/commodity/wasde" style="color:var(--accent)" target="_blank">USDA WASDE Reports</a></span>
+<span style="color:var(--muted)">駁船費率</span><span>USDA AMS — Grain Transportation Report, Downbound Grain Barge Rates (% of Tariff)<br><a href="https://www.ams.usda.gov/services/transportation-analysis/gtr" style="color:var(--accent)" target="_blank">USDA AMS GTR</a></span>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>保證金數據</h3>
+<div style="font-size:13px;line-height:2.2">
+<div style="display:grid;grid-template-columns:200px 1fr;gap:4px 16px">
+<span style="color:var(--muted)">標準玉米 (ZC)</span><span>CME Group — Performance Bond / Margin Requirements, Corn Futures<br><a href="https://www.cmegroup.com/clearing/margins/outright-vol-scans.html" style="color:var(--accent)" target="_blank">CME Margins</a>（數據為 2025 年公告值，會隨波動率調整）</span>
+<span style="color:var(--muted)">微型玉米 (XC)</span><span>CME Group — Micro Corn Futures, 1/5 標準合約規格</span>
+</div>
+</div>
+</div>
+
+<div class="note" style="margin-top:20px">本報告所有回測結果均基於歷史數據，不構成投資建議。過去績效不代表未來表現。所有策略均存在虧損風險，交易前請充分了解期貨交易風險。</div>
+</div>
+
+</div><!-- content-area -->
+</div><!-- container -->
+
+<script>
+// ===== DATA =====
+const s1 = [
+  {y:2000,e:234.0,x:175.8,pnl:2912,hi:241.0,soil:83.0,ge:70,skip:true,reason:"土壤>35%",src:"IA"},
+  {y:2001,e:205.5,x:221.5,pnl:-800,hi:236.0,soil:5.0,ge:70,skip:false,src:"IA"},
+  {y:2002,e:219.0,x:273.0,pnl:-2700,hi:276.0,soil:22.0,ge:43,skip:true,reason:"作物優良率G/E<60%",src:"IA"},
+  {y:2003,e:243.5,x:220.0,pnl:1175,hi:245.0,soil:8.0,ge:68,skip:false,src:"IA"},
+  {y:2004,e:321.2,x:217.0,pnl:5212,hi:322.5,soil:5.0,ge:68,skip:false,src:"IA"},
+  {y:2005,e:232.0,x:217.2,pnl:738,hi:263.2,soil:8.0,ge:62,skip:false,src:"IA"},
+  {y:2006,e:266.0,x:222.0,pnl:2200,hi:271.0,soil:20.0,ge:70,skip:false,src:"IA"},
+  {y:2007,e:390.8,x:327.8,pnl:3150,hi:436.0,soil:2.0,ge:78,skip:false,src:"IA"},
+  {y:2008,e:610.8,x:556.5,pnl:2712,hi:779.0,soil:1.0,ge:63,skip:false,src:"IA"},
+  {y:2009,e:452.2,x:317.2,pnl:6750,hi:460.0,soil:5.0,ge:70,skip:false,src:"IA"},
+  {y:2010,e:364.0,x:409.0,pnl:-2250,hi:425.0,soil:3.0,ge:76,skip:false,src:"IA"},
+  {y:2011,e:726.5,x:703.8,pnl:1138,hi:765.0,soil:1.0,ge:63,skip:false,src:"IA"},
+  {y:2012,e:520.8,x:780.0,pnl:-12962,hi:843.8,soil:42.0,ge:72,skip:true,reason:"土壤>35%",src:"IA"},
+  {y:2013,e:589.0,x:465.0,pnl:6200,hi:610.5,soil:5.0,ge:63,skip:false,src:"IA+IL",edate:"6/4"},
+  {y:2014,e:456.8,x:361.0,pnl:4788,hi:461.5,soil:28.0,ge:76,skip:false,src:"IA+IL"},
+  {y:2015,e:358.0,x:363.5,pnl:-275,hi:443.2,soil:7.0,ge:74,skip:false,src:"IA+IL"},
+  {y:2016,e:415.0,x:321.2,pnl:4688,hi:444.0,soil:3.0,ge:72,skip:false,src:"IA+IL"},
+  {y:2017,e:378.2,x:361.0,pnl:862,hi:404.8,soil:0.5,ge:65,skip:false,src:"IA+IL"},
+  {y:2018,e:398.8,x:362.2,pnl:1825,hi:398.8,soil:20.5,ge:79,skip:false,src:"IA+IL"},
+  {y:2019,e:435.2,x:360.2,pnl:3750,hi:468.8,soil:0.5,ge:59,skip:true,reason:"G/E<60%",src:"IA+IL"},
+  {y:2020,e:327.2,x:327.0,pnl:12,hi:355.0,soil:1.0,ge:74,skip:false,src:"IA+IL"},
+  {y:2021,e:597.0,x:568.2,pnl:1438,hi:649.2,soil:27.0,ge:76,skip:false,src:"IA+IL"},
+  {y:2022,e:711.0,x:630.5,pnl:4025,hi:754.2,soil:11.5,ge:73,skip:false,src:"IA+IL",edate:"6/7"},
+  {y:2023,e:523.5,x:474.0,pnl:2475,hi:624.8,soil:41.5,ge:69,skip:true,reason:"土壤>35%",src:"IA+IL"},
+  {y:2024,e:448.2,x:380.8,pnl:3370,hi:465.2,soil:6.0,ge:75,skip:false,src:"IA+IL",edate:"6/4"},
+  {y:2025,e:423.2,x:375.5,pnl:2388,hi:434.8,soil:27.5,ge:68,skip:false,src:"IA+IL"},
+];
+
+const s2a = [
+  {y:2004,e:237.0,x:202.0,pnl:-1750,rc:59,per:"訓練"},
+  {y:2005,e:216.5,x:196.2,pnl:-1012,rc:260,per:"訓練"},
+  {y:2006,e:247.8,x:320.8,pnl:3650,rc:221,per:"訓練"},
+  {y:2007,e:342.5,x:375.5,pnl:1650,rc:244,per:"訓練"},
+  {y:2010,e:438.8,x:585.0,pnl:7312,rc:255,per:"訓練"},
+  {y:2014,e:362.5,x:374.5,pnl:600,rc:489,per:"測試"},
+  {y:2016,e:315.5,x:354.8,pnl:1962,rc:141,per:"測試"},
+  {y:2018,e:365.5,x:363.2,pnl:-112,rc:77,per:"測試"},
+  {y:2020,e:356.2,x:396.0,pnl:1988,rc:296,per:"測試"},
+  {y:2021,e:534.8,x:568.0,pnl:1662,rc:80,per:"測試"},
+  {y:2022,e:670.0,x:689.0,pnl:950,rc:299,per:"測試"},
+  {y:2024,e:400.5,x:410.8,pnl:512,rc:159,per:"測試"},
+];
+
+const s2b = [
+  {y:2000,e:195.8,x:205.0,pnl:462,rc:-25,ge:67,trig:"作物優良率G+E>65%"},
+  {y:2001,e:232.0,x:205.0,pnl:-1350,rc:19,ge:55,trig:"車廂>0"},
+  {y:2003,e:238.5,x:246.0,pnl:375,rc:10,ge:46,trig:"車廂>0"},
+  {y:2004,e:237.0,x:202.0,pnl:-1750,rc:59,ge:70,trig:"兩者皆是"},
+  {y:2005,e:216.5,x:196.2,pnl:-1012,rc:260,ge:52,trig:"車廂>0"},
+  {y:2006,e:247.8,x:320.8,pnl:3650,rc:221,ge:57,trig:"車廂>0"},
+  {y:2007,e:342.5,x:375.5,pnl:1650,rc:244,ge:59,trig:"車廂>0"},
+  {y:2009,e:328.2,x:362.0,pnl:1688,rc:-21,ge:69,trig:"作物優良率G+E>65%"},
+  {y:2010,e:438.8,x:585.0,pnl:7312,rc:255,ge:70,trig:"兩者皆是"},
+  {y:2014,e:362.5,x:374.5,pnl:600,rc:489,ge:74,trig:"兩者皆是"},
+  {y:2015,e:374.5,x:381.2,pnl:338,rc:-146,ge:68,trig:"作物優良率G+E>65%"},
+  {y:2016,e:315.5,x:354.8,pnl:1962,rc:141,ge:75,trig:"兩者皆是"},
+  {y:2018,e:365.5,x:363.2,pnl:-112,rc:77,ge:68,trig:"兩者皆是"},
+  {y:2020,e:356.2,x:396.0,pnl:1988,rc:296,ge:62,trig:"車廂>0"},
+  {y:2021,e:534.8,x:568.0,pnl:1662,rc:80,ge:60,trig:"車廂>0"},
+  {y:2022,e:670.0,x:689.0,pnl:950,rc:299,ge:54,trig:"車廂>0"},
+  {y:2024,e:400.5,x:410.8,pnl:512,rc:159,ge:65,trig:"車廂>0"},
+];
+
+// UP-only railcar premium, hybrid method (近月優先，無近月時用全部報價)
+const rcAll = {
+  2000:-25, 2001:19, 2002:-32, 2003:10, 2004:59, 2005:260,
+  2006:221, 2007:244, 2008:-55, 2009:-21, 2010:255, 2011:-264,
+  2012:-181, 2013:-36, 2014:489, 2015:-146, 2016:141, 2017:-80,
+  2018:77, 2019:-70, 2020:296, 2021:80, 2022:299, 2023:-50,
+  2024:159, 2025:-92
+};
+// Complete crop G+E for long strategy (8月底數據，與做空5月底的geRaw不同時間點)
+const geLongAll = {
+  2000:67, 2001:55, 2002:42, 2003:46, 2004:70, 2005:52,
+  2006:57, 2007:59, 2008:61, 2009:69, 2010:70, 2011:54,
+  2012:22, 2013:59, 2014:74, 2015:68, 2016:75, 2017:62,
+  2018:68, 2019:57, 2020:62, 2021:60, 2022:54, 2023:56,
+  2024:65, 2025:69
+};
+const geGoodAll = {
+  2000:45, 2001:43, 2002:33, 2003:36, 2004:49, 2005:39,
+  2006:41, 2007:43, 2008:46, 2009:49, 2010:48, 2011:42,
+  2012:19, 2013:44, 2014:52, 2015:49, 2016:54, 2017:48,
+  2018:47, 2019:47, 2020:48, 2021:46, 2022:42, 2023:47,
+  2024:49, 2025:50,
+};
+const geExcAll = {
+  2000:22, 2001:12, 2002:9, 2003:10, 2004:21, 2005:13,
+  2006:16, 2007:16, 2008:15, 2009:20, 2010:22, 2011:12,
+  2012:3, 2013:15, 2014:22, 2015:19, 2016:21, 2017:14,
+  2018:21, 2019:10, 2020:14, 2021:14, 2022:12, 2023:9,
+  2024:16, 2025:19,
+};
+// Complete ZCZ 9/1→11/1 base trade data for ALL years (unfiltered)
+const zcz_base = {
+  2000:{e:195.8,x:205.0,pnl:462,lo:187.0},
+  2001:{e:232.0,x:205.0,pnl:-1350,lo:203.2},
+  2002:{e:268.5,x:247.8,pnl:-1038,lo:245.0},
+  2003:{e:238.5,x:246.0,pnl:375,lo:213.2},
+  2004:{e:237.0,x:202.0,pnl:-1750,lo:200.0},
+  2005:{e:216.5,x:196.2,pnl:-1012,lo:196.0},
+  2006:{e:247.8,x:320.8,pnl:3650,lo:236.0},
+  2007:{e:342.5,x:375.5,pnl:1650,lo:335.0},
+  2008:{e:576.0,x:398.0,pnl:-8900,lo:364.0},
+  2009:{e:328.2,x:362.0,pnl:1688,lo:302.0},
+  2010:{e:438.8,x:585.0,pnl:7312,lo:437.8},
+  2011:{e:766.0,x:646.2,pnl:-5988,lo:572.2},
+  2012:{e:802.8,x:755.5,pnl:-2362,lo:705.0},
+  2013:{e:491.0,x:427.8,pnl:-3162,lo:425.8},
+  2014:{e:362.5,x:374.5,pnl:600,lo:318.2},
+  2015:{e:374.5,x:381.2,pnl:338,lo:360.5},
+  2016:{e:315.5,x:354.8,pnl:1962,lo:315.0},
+  2017:{e:357.0,x:345.8,pnl:-562,lo:342.5},
+  2018:{e:365.5,x:363.2,pnl:-112,lo:342.5},
+  2019:{e:369.5,x:389.2,pnl:988,lo:352.2},
+  2020:{e:356.2,x:396.0,pnl:1988,lo:351.0},
+  2021:{e:534.8,x:568.0,pnl:1662,lo:497.5},
+  2022:{e:670.0,x:689.0,pnl:950,lo:654.0},
+  2023:{e:478.0,x:478.8,pnl:38,lo:467.8},
+  2024:{e:400.5,x:410.8,pnl:512,lo:397.0},
+  2025:null
+};
+
+function pts(pnl) { return pnl / 50; }
+function fmtP(v) { return (v >= 0 ? '+' : '') + v.toFixed(1); }
+
+// ===== TAB SWITCHING =====
+function showTab(i) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec' + i).classList.add('active');
+  document.querySelectorAll('.tab')[i].classList.add('active');
+}
+
+// ===== RANKING TABLE =====
+// Dynamically compute ranking from actual data
+(function() {
+  const cotHedgeSkipR = new Set([2001, 2005, 2010, 2012, 2015, 2017, 2020, 2023, 2024, 2025]);
+  const cotSpecSkipR = new Set([2001, 2015, 2017, 2020, 2023, 2024, 2025]);
+
+  const sA = s1.filter(t => !t.skip);
+  const sB = s1.filter(t => !t.skip && !cotHedgeSkipR.has(t.y));
+  const sC = s1.filter(t => !t.skip && !cotSpecSkipR.has(t.y));
+
+  function mkStrat(name, arr) {
+    const pnls = arr.map(t => pts(t.pnl));
+    const total = pnls.reduce((a, b) => a + b, 0);
+    const wins = pnls.filter(p => p > 0).length;
+    return { name: name, n: arr.length, wr: wins / arr.length * 100, avg: total / arr.length };
+  }
+
+  var strategies = [
+    mkStrat('B \u2014 \u505a\u7a7a ZCU\uff08\u4e7e\u65f1\u7be9\u9078 + COT\u907f\u96aa\u5009\u6301\u5009\uff09', sB),
+    mkStrat('C \u2014 \u505a\u7a7a ZCU\uff08\u4e7e\u65f1\u7be9\u9078 + COT\u6295\u6a5f\u5009\u6301\u5009\uff09', sC),
+    mkStrat('A \u2014 \u505a\u7a7a ZCU \u4e7e\u65f1\u7be9\u9078', sA),
+    mkStrat('D \u2014 \u505a\u591a ZCZ \u7cbe\u6e96\u7248', s2a),
+    mkStrat('E \u2014 \u505a\u591a ZCZ \u6db5\u84cb\u7248', s2b),
+  ];
+  strategies.sort((a, b) => b.wr - a.wr);
+
+  let rankHtml = '';
+  strategies.forEach((s, i) => {
+    const badge = i === 0 ? '<span class="badge badge-gold">1st</span>' : i === 1 ? '<span class="badge badge-silver">2nd</span>' : i === 2 ? '<span class="badge badge-bronze">3rd</span>' : '';
+    rankHtml += '<tr><td>' + badge + '</td><td style="font-weight:600;text-align:left">' + s.name + '</td><td>' + s.n + '</td><td style="font-weight:700">' + s.wr.toFixed(1) + '%</td><td>' + fmtP(s.avg) + '</td></tr>';
+  });
+  document.getElementById('rank_table').innerHTML = rankHtml;
+})();
+
+// ===== COT DATA =====
+const cotData = {
+  2000:{h:-45468,s:57785},  2001:{h:45412,s:-32111},
+  2002:{h:-1888,s:16823},   2003:{h:-46903,s:60636},
+  2004:{h:-64365,s:94666},  2005:{h:67138,s:334},
+  2006:{h:-152879,s:266393},2007:{h:-144862,s:212795},
+  2008:{h:-247492,s:352320},2009:{h:-93715,s:194180},
+  2010:{h:14333,s:122848},  2011:{h:-395045,s:463518},
+  2012:{h:5927,s:106651},   2013:{h:-54537,s:152499},
+  2014:{h:-80111,s:221308}, 2015:{h:138669,s:-54449},
+  2016:{h:-181712,s:248848},2017:{h:88985,s:-99501},
+  2018:{h:-311338,s:392609},2019:{h:-156537,s:109994},
+  2020:{h:184402,s:-220075},2021:{h:-379469,s:428426},
+  2022:{h:-353348,s:404200},2023:{h:72210,s:-20407},
+  2024:{h:90934,s:-51632},  2025:{h:52564,s:-20333}
+};
+const cotHedgeSkip = new Set([2001, 2005, 2010, 2012, 2015, 2017, 2020, 2023, 2024, 2025]);
+const cotSpecSkip  = new Set([2001, 2015, 2017, 2020, 2023, 2024, 2025]);
+
+// ===== S1 DETAIL TABLE (with cumulative & drawdown) =====
+let s1html = '';
+s1.forEach(t => {
+  const p = pts(t.pnl);
+  const pCls = t.pnl > 0 ? 'green' : 'red';
+  const entryNote = t.edate ? '<br><span style="font-size:10px;color:var(--amber)">' + t.edate + ' \u5ef6\u9072\u5165\u5834</span>' : '';
+
+  // MAE: max adverse excursion = (high - entry) for short trade
+  const mae = t.hi ? (t.hi - t.e).toFixed(1) : '\u2014';
+  const maeStr = t.hi
+    ? '<span style="color:#d35400;font-weight:700">-' + mae + '</span>'
+    : '\u2014';
+
+  // Soil & GE — strikethrough if value failed the filter
+  const soilVal = t.soil != null ? t.soil.toFixed(1) + '%' : 'N/A';
+  const soilFail = t.soil != null && t.soil > 35;
+  const soilStr = soilFail ? '<s>' + soilVal + '</s>' : soilVal;
+  const geVal = t.ge != null ? t.ge + '%' : 'N/A';
+  const geFail = t.ge != null && t.ge < 60;
+  const geStr = geFail ? '<s>' + geVal + '</s>' : geVal;
+
+  // COT columns — strikethrough if value blocked that strategy
+  const cot = cotData[t.y] || {};
+  const hRaw = cot.h != null ? (cot.h >= 0 ? '+' : '') + cot.h.toLocaleString() : 'N/A';
+  const sRaw = cot.s != null ? (cot.s >= 0 ? '+' : '') + cot.s.toLocaleString() : 'N/A';
+  const hFail = cot.h > 0;
+  const sFail = cot.s < 0;
+  const hNet = hFail ? '<s>' + hRaw + '</s>' : hRaw;
+  const sNet = sFail ? '<s>' + sRaw + '</s>' : sRaw;
+
+  // Strategy entry badges
+  let badges = '';
+  if (t.skip) {
+    badges = '<span style="color:var(--muted)">\u672a\u901a\u904e\u4e7e\u65f1\u7be9\u9078</span>';
+  } else {
+    badges = '<span class="badge bg-a" style="font-size:10px;margin:1px">A</span>';
+    if (!cotHedgeSkip.has(t.y)) {
+      badges += ' <span class="badge bg-b" style="font-size:10px;margin:1px">B</span>';
+    }
+    if (!cotSpecSkip.has(t.y)) {
+      badges += ' <span class="badge bg-c" style="font-size:10px;margin:1px">C</span>';
+    }
+  }
+
+  s1html += '<tr' + (t.y === 2013 ? ' style="border-top:2px solid var(--accent)"' : '') + '>'
+    + '<td>' + t.y + '</td>'
+    + '<td>' + t.e.toFixed(1) + entryNote + '</td>'
+    + '<td>' + t.x.toFixed(1) + '</td>'
+    + '<td class="' + pCls + '" style="font-weight:700">' + fmtP(p) + '</td>'
+    + '<td>' + maeStr + '</td>'
+    + '<td style="font-size:11px">' + soilStr + '</td>'
+    + '<td style="font-size:11px">' + geStr + '</td>'
+    + '<td style="text-align:right;font-size:11px">' + hNet + '</td>'
+    + '<td style="text-align:right;font-size:11px">' + sNet + '</td>'
+    + '<td style="text-align:center">' + badges + '</td>'
+    + '</tr>';
+});
+document.getElementById('s1_detail').innerHTML = s1html;
+
+// ===== COT RAW DATA TABLE =====
+const cotDates = {2000:"5/26",2001:"5/25",2002:"5/31",2003:"5/30",2004:"5/28",2005:"5/27",2006:"5/26",2007:"5/25",2008:"5/30",2009:"5/29",2010:"5/28",2011:"5/27",2012:"5/25",2013:"5/31",2014:"5/30",2015:"5/29",2016:"5/27",2017:"5/26",2018:"5/25",2019:"5/31",2020:"5/29",2021:"5/28",2022:"5/27",2023:"5/26",2024:"5/31",2025:"5/30"};
+let cotHtml = '';
+for (let y = 2000; y <= 2025; y++) {
+  const c = cotData[y];
+  if (!c) continue;
+  const hStr = (c.h >= 0 ? '+' : '') + c.h.toLocaleString();
+  const sStr = (c.s >= 0 ? '+' : '') + c.s.toLocaleString();
+  const hCls = c.h > 0 ? ' style="color:#dc2626;font-weight:700"' : '';
+  const sCls = c.s < 0 ? ' style="color:#dc2626;font-weight:700"' : '';
+  const bPass = !cotHedgeSkip.has(y);
+  const cPass = !cotSpecSkip.has(y);
+  const bBadge = bPass ? '<span class="badge bg-b" style="font-size:10px">進場</span>' : '<span style="color:#dc2626;font-weight:700;font-size:12px">&#10007; 不做空</span>';
+  const cBadge = cPass ? '<span class="badge bg-c" style="font-size:10px">進場</span>' : '<span style="color:#dc2626;font-weight:700;font-size:12px">&#10007; 不做空</span>';
+  cotHtml += '<tr><td>' + y + '</td><td>' + (cotDates[y] || '') + '</td><td' + hCls + '>' + hStr + '</td><td' + sCls + '>' + sStr + '</td><td style="text-align:center">' + bBadge + '</td><td style="text-align:center">' + cBadge + '</td></tr>';
+}
+document.getElementById('cot_detail').innerHTML = cotHtml;
+
+// ===== SOIL RAW DATA TABLE =====
+const soilRaw = [
+  {y:2000,wk:'2000-05-28',ia_s:44,ia_vs:39,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2001,wk:'2001-05-27',ia_s:5,ia_vs:0,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2002,wk:'2002-05-26',ia_s:18,ia_vs:4,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2003,wk:'2003-05-25',ia_s:7,ia_vs:1,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2004,wk:'2004-05-30',ia_s:5,ia_vs:0,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2005,wk:'2005-05-29',ia_s:7,ia_vs:1,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2006,wk:'2006-05-28',ia_s:17,ia_vs:3,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2007,wk:'2007-05-27',ia_s:2,ia_vs:0,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2008,wk:'2008-05-25',ia_s:1,ia_vs:0,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2009,wk:'2009-05-31',ia_s:4,ia_vs:1,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2010,wk:'2010-05-30',ia_s:3,ia_vs:0,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2011,wk:'2011-05-29',ia_s:1,ia_vs:0,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2012,wk:'2012-05-27',ia_s:32,ia_vs:10,il_s:'-',il_vs:'-',period:'IA'},
+  {y:2013,wk:'2013-05-26',ia_s:7,ia_vs:1,il_s:2,il_vs:0,period:'IA+IL'},
+  {y:2014,wk:'2014-05-25',ia_s:25,ia_vs:7,il_s:20,il_vs:4,period:'IA+IL'},
+  {y:2015,wk:'2015-05-31',ia_s:6,ia_vs:0,il_s:8,il_vs:0,period:'IA+IL'},
+  {y:2016,wk:'2016-05-29',ia_s:3,ia_vs:0,il_s:3,il_vs:0,period:'IA+IL'},
+  {y:2017,wk:'2017-05-28',ia_s:0,ia_vs:0,il_s:1,il_vs:0,period:'IA+IL'},
+  {y:2018,wk:'2018-05-27',ia_s:12,ia_vs:5,il_s:22,il_vs:2,period:'IA+IL'},
+  {y:2019,wk:'2019-05-26',ia_s:1,ia_vs:0,il_s:0,il_vs:0,period:'IA+IL'},
+  {y:2020,wk:'2020-05-31',ia_s:1,ia_vs:0,il_s:1,il_vs:0,period:'IA+IL'},
+  {y:2021,wk:'2021-05-30',ia_s:28,ia_vs:10,il_s:13,il_vs:3,period:'IA+IL'},
+  {y:2022,wk:'2022-05-29',ia_s:18,ia_vs:2,il_s:3,il_vs:0,period:'IA+IL'},
+  {y:2023,wk:'2023-05-28',ia_s:36,ia_vs:10,il_s:31,il_vs:6,period:'IA+IL'},
+  {y:2024,wk:'2024-05-26',ia_s:9,ia_vs:2,il_s:1,il_vs:0,period:'IA+IL'},
+  {y:2025,wk:'2025-05-25',ia_s:23,ia_vs:5,il_s:23,il_vs:4,period:'IA+IL'},
+];
+// Helper: convert 'YYYY-MM-DD' to 'M/D'
+function md(wk) { const p = wk.split('-'); return parseInt(p[1]) + '/' + parseInt(p[2]); }
+let soilHtml = '';
+soilRaw.forEach(r => {
+  const iaTot = r.ia_s + r.ia_vs;
+  const hasIL = r.il_s !== '-';
+  const ilTot = hasIL ? (r.il_s + r.il_vs) : null;
+  const soil = hasIL ? ((iaTot + ilTot) / 2) : iaTot;
+  const cls = soil > 35 ? 'red' : '';
+  const periodBadge = r.period === 'IA' ?
+    '<span class="badge" style="background:#fef3c7;color:#92400e;font-size:10px">僅 IA</span>' :
+    '<span class="badge" style="background:#dbeafe;color:#1e40af;font-size:10px">IA+IL</span>';
+  const ilCells = hasIL ?
+    '<td>' + r.il_s + '%</td><td>' + r.il_vs + '%</td><td style="font-weight:600">' + ilTot + '%</td>' :
+    '<td style="color:#d1d5db">—</td><td style="color:#d1d5db">—</td><td style="color:#d1d5db">—</td>';
+  soilHtml += '<tr' + (r.y === 2013 ? ' style="border-top:2px solid var(--accent)"' : '') + '><td>' + r.y + '</td><td>' + md(r.wk) + '</td><td style="text-align:center">' + periodBadge + '</td><td>' + r.ia_s + '%</td><td>' + r.ia_vs + '%</td><td style="font-weight:600">' + iaTot + '%</td>' + ilCells + '<td class="' + cls + '" style="font-weight:700">' + soil.toFixed(1) + '%</td></tr>';
+});
+document.getElementById('soil_detail').innerHTML = soilHtml;
+
+// ===== G/E RAW DATA TABLE =====
+const geRaw = [
+  {y:2000,wk:'2000-05-28',vp:1,p:5,f:24,g:55,e:15},
+  {y:2001,wk:'2001-05-27',vp:1,p:4,f:25,g:58,e:12},
+  {y:2002,wk:'2002-05-26',vp:4,p:13,f:40,g:38,e:5},
+  {y:2003,wk:'2003-06-01',vp:1,p:4,f:27,g:55,e:13},
+  {y:2004,wk:'2004-05-30',vp:2,p:5,f:25,g:53,e:15},
+  {y:2005,wk:'2005-05-29',vp:1,p:6,f:31,g:54,e:8},
+  {y:2006,wk:'2006-05-28',vp:1,p:4,f:25,g:58,e:12},
+  {y:2007,wk:'2007-05-27',vp:1,p:3,f:18,g:60,e:18},
+  {y:2008,wk:'2008-06-01',vp:2,p:5,f:30,g:53,e:10},
+  {y:2009,wk:'2009-05-31',vp:1,p:3,f:26,g:58,e:12},
+  {y:2010,wk:'2010-05-30',vp:1,p:3,f:20,g:61,e:15},
+  {y:2011,wk:'2011-05-29',vp:2,p:4,f:31,g:53,e:10},
+  {y:2012,wk:'2012-05-27',vp:1,p:4,f:23,g:59,e:13},
+  {y:2013,wk:'2013-06-02',vp:2,p:5,f:30,g:52,e:11},
+  {y:2014,wk:'2014-06-01',vp:0,p:2,f:22,g:63,e:13},
+  {y:2015,wk:'2015-05-31',vp:0,p:3,f:23,g:62,e:12},
+  {y:2016,wk:'2016-05-29',vp:1,p:3,f:24,g:60,e:12},
+  {y:2017,wk:'2017-05-28',vp:1,p:6,f:28,g:57,e:8},
+  {y:2018,wk:'2018-05-27',vp:1,p:2,f:18,g:63,e:16},
+  {y:2019,wk:'2019-06-09',vp:2,p:7,f:32,g:52,e:7},
+  {y:2020,wk:'2020-05-31',vp:1,p:3,f:22,g:61,e:13},
+  {y:2021,wk:'2021-05-30',vp:1,p:3,f:20,g:62,e:14},
+  {y:2022,wk:'2022-06-05',vp:1,p:3,f:23,g:61,e:12},
+  {y:2023,wk:'2023-05-28',vp:1,p:4,f:26,g:58,e:11},
+  {y:2024,wk:'2024-06-02',vp:1,p:3,f:21,g:60,e:15},
+  {y:2025,wk:'2025-05-25',vp:1,p:4,f:27,g:56,e:12},
+];
+// Delayed entry dates for years where Condition report came after 6/2
+const geEntryDates = {2013:'6/4',2019:'6/11',2022:'6/7',2024:'6/4'};
+let geHtml = '';
+geRaw.forEach(r => {
+  const ge = r.g + r.e;
+  const geCls = ge < 60 ? 'red' : '';
+  const delayed = geEntryDates[r.y];
+  const entryBadge = delayed ?
+    '<span class="badge" style="font-size:10px;background:var(--amber);color:#000">' + delayed + ' (延遲)</span>' :
+    '<span class="badge badge-green" style="font-size:10px">6/2</span>';
+  geHtml += '<tr><td>' + r.y + '</td><td>' + md(r.wk) + '</td><td>' + r.vp + '%</td><td>' + r.p + '%</td><td>' + r.f + '%</td><td>' + r.g + '%</td><td>' + r.e + '%</td><td class="' + geCls + '" style="font-weight:700">' + ge + '%</td><td style="text-align:center">' + entryBadge + '</td></tr>';
+});
+document.getElementById('ge_detail').innerHTML = geHtml;
+
+// ===== COMBINED S2 DETAIL TABLE (D/E merged, ALL 26 years with prices & MDD) =====
+const s2bMap = {}; s2b.forEach(t => { s2bMap[t.y] = t; });
+const s2aMap2 = {}; s2a.forEach(t => { s2aMap2[t.y] = t; });
+
+let s2html = '';
+for (let y = 2000; y <= 2025; y++) {
+  const base = zcz_base[y];
+  if (!base) continue; // skip 2025 (null)
+
+  const dTrade = s2aMap2[y];
+  const eTrade = s2bMap[y];
+  const hasTrade = dTrade || eTrade;
+
+  // Prices always from zcz_base (complete data for all years)
+  const eStr = base.e.toFixed(1);
+  const xStr = base.x.toFixed(1);
+  const p = pts(base.pnl);
+  const pCls = base.pnl > 0 ? 'green' : 'red';
+  const pStr = '<span class="' + pCls + '" style="font-weight:700">' + fmtP(p) + '</span>';
+
+  // MAE: max adverse excursion = (entry - low) for long trade
+  const mae = base.lo ? (base.e - base.lo).toFixed(1) : '\u2014';
+  const maeStr = base.lo
+    ? '<span style="color:#d35400;font-weight:700">-' + mae + '</span>'
+    : '\u2014';
+
+  // RC & GE from complete arrays
+  const rc = rcAll[y];
+  const rcStr = rc != null ? (rc >= 0 ? '+' : '') + rc : 'N/A';
+  const ge = geLongAll[y];
+  const geStr = ge != null ? ge + '%' : 'N/A';
+
+  // Strategy badges
+  let badges = '';
+  if (dTrade) badges += '<span class="badge bg-d" style="font-size:10px;margin-right:3px">D</span>';
+  if (eTrade) badges += '<span class="badge bg-e" style="font-size:10px;margin-right:3px">E</span>';
+  if (!hasTrade) badges = '<span style="color:#94a3b8">\u2014</span>';
+
+  s2html += '<tr><td>' + y + '</td><td>' + eStr + '</td><td>' + xStr + '</td><td>' + pStr + '</td><td>' + maeStr + '</td><td>' + rcStr + '</td><td>' + geStr + '</td><td style="text-align:center">' + badges + '</td></tr>';
+}
+document.getElementById('s2_detail').innerHTML = s2html;
+
+// ===== RC (RAILCAR) RAW DATA TABLE — ALL 26 years =====
+let rcHtml = '';
+for (let y = 2000; y <= 2025; y++) {
+  const rc = rcAll[y];
+  const rcStr = rc != null ? (rc >= 0 ? '+' : '') + rc : 'N/A';
+
+  const ge = geLongAll[y];
+
+  // D filter: rc > 50
+  const dPass = rc != null && rc > 50;
+  const dBadge = dPass
+    ? '<span class="badge bg-d" style="font-size:10px">\u2714</span>'
+    : '<span style="color:#94a3b8">\u2014</span>';
+
+  // E filter: rc > 0 OR ge > 65
+  const ePassRc = rc != null && rc > 0;
+  const ePassGe = ge != null && ge > 65;
+  const ePass = ePassRc || ePassGe;
+  const eBadge = ePass
+    ? '<span class="badge bg-e" style="font-size:10px">\u2714</span>'
+    : '<span style="color:#94a3b8">\u2014</span>';
+
+  rcHtml += '<tr><td>' + y + '</td><td>' + rcStr + '</td><td style="text-align:center">' + dBadge + '</td><td style="text-align:center">' + eBadge + '</td></tr>';
+}
+document.getElementById('rc_detail').innerHTML = rcHtml;
+
+// ===== GE (Crop Condition) RAW DATA for Long strategy — ALL 26 years =====
+let geLongHtml = '';
+for (let y = 2000; y <= 2025; y++) {
+  const g = geGoodAll[y];
+  const e = geExcAll[y];
+  const ge = geLongAll[y];
+  const gStr = g != null ? g + '%' : 'N/A';
+  const eStr = e != null ? e + '%' : 'N/A';
+  const geStr = ge != null ? ge + '%' : 'N/A';
+  const pass = ge != null && ge > 65;
+  const badge = pass
+    ? '<span class="badge bg-e" style="font-size:10px">\u2714</span>'
+    : '<span style="color:#94a3b8">\u2014</span>';
+  geLongHtml += '<tr><td>' + y + '</td><td>' + gStr + '</td><td>' + eStr + '</td><td>' + geStr + '</td><td style="text-align:center">' + badge + '</td></tr>';
+}
+document.getElementById('ge_long_detail').innerHTML = geLongHtml;
+
+// ===== CHART COLORS =====
+const chartTick = '#64748b';
+const chartGrid = '#e2e8f0';
+const chartText = '#334155';
+
+// ===== PERFORMANCE SUMMARY TABLES =====
+// Helper: compute perf stats for a set of trades
+function calcPerf(trades) {
+  const active = trades.filter(t => !t.skip);
+  const pnls = active.map(t => pts(t.pnl));
+  const total = pnls.reduce((a, b) => a + b, 0);
+  const maxP = Math.max(...pnls);
+  const minP = Math.min(...pnls);
+  const maxYear = active[pnls.indexOf(maxP)].y;
+  const minYear = active[pnls.indexOf(minP)].y;
+  // MDD calculation
+  let cum = 0, peak = 0, mdd = 0, mddPeakIdx = 0, mddEndIdx = 0, ddStart = 0;
+  const cumArr = [];
+  pnls.forEach((p, i) => {
+    cum += p;
+    cumArr.push(cum);
+    if (cum > peak) { peak = cum; ddStart = i; }
+    const dd = peak - cum;
+    if (dd > mdd) { mdd = dd; mddPeakIdx = ddStart; mddEndIdx = i; }
+  });
+  const mddFromYear = mdd > 0 ? active[mddPeakIdx].y : null;
+  const mddToYear = mdd > 0 ? active[mddEndIdx].y : null;
+  const mddSpan = (mddFromYear && mddToYear) ? (mddToYear - mddFromYear) : 0;
+  return { total, maxP, maxYear, minP, minYear, mdd, mddFromYear, mddToYear, mddSpan };
+}
+
+// S1 perf table: comprehensive comparison
+(function() {
+  const cotHedgeSkipLocal = new Set([2001, 2005, 2010, 2012, 2015, 2017, 2020, 2023, 2024, 2025]);
+  const cotSpecSkipLocal = new Set([2001, 2015, 2017, 2020, 2023, 2024, 2025]);
+
+  const sA = s1.filter(t => !t.skip);
+  const sB = s1.filter(t => !t.skip && !cotHedgeSkipLocal.has(t.y));
+  const sC = s1.filter(t => !t.skip && !cotSpecSkipLocal.has(t.y));
+
+  const wrap = arr => arr.map(t => ({...t, skip: false}));
+  const pA = calcPerf(wrap(sA));
+  const pB = calcPerf(wrap(sB));
+  const pC = calcPerf(wrap(sC));
+
+  // Win rates
+  const wrA = (sA.filter(t => t.pnl > 0).length / sA.length * 100).toFixed(1);
+  const wrB = (sB.filter(t => t.pnl > 0).length / sB.length * 100).toFixed(1);
+  const wrC = (sC.filter(t => t.pnl > 0).length / sC.length * 100).toFixed(1);
+
+  function row(label, a, b, c) {
+    return '<tr><td style="font-weight:600">' + label + '</td><td>' + a + '</td><td>' + b + '</td><td>' + c + '</td></tr>';
+  }
+  let html = '';
+  html += row('\u4ea4\u6613\u6578', sA.length, sB.length, sC.length);
+  html += row('\u52dd\u7387', wrA + '%', (wrB === '100.0' ? '<span class="green" style="font-weight:700">100%</span>' : wrB + '%'), wrC + '%');
+  html += row('\u5e73\u5747 pts', fmtP(pA.total/sA.length), fmtP(pB.total/sB.length), fmtP(pC.total/sC.length));
+  html += row('\u5efa\u8b70\u4fdd\u8b49\u91d1', '$5,000 / \u53e3\uff08\u6a19\u6e96\uff09<br>$1,000 / \u53e3\uff08\u5fae\u578b\uff09', '$3,000 / \u53e3\uff08\u6a19\u6e96\uff09<br>$600 / \u53e3\uff08\u5fae\u578b\uff09', '$5,000 / \u53e3\uff08\u6a19\u6e96\uff09<br>$1,000 / \u53e3\uff08\u5fae\u578b\uff09');
+  document.getElementById('s1_perf').innerHTML = html;
+})();
+
+// Combined D/E performance comparison table
+(function() {
+  const pD = calcPerf(s2a.map(t => ({...t, skip: false})));
+  const pE = calcPerf(s2b.map(t => ({...t, skip: false})));
+
+  const winsD = s2a.filter(t => t.pnl > 0).length;
+  const winsE = s2b.filter(t => t.pnl > 0).length;
+  const wrD = (winsD / s2a.length * 100).toFixed(1);
+  const wrE = (winsE / s2b.length * 100).toFixed(1);
+
+  function row(label, vD, vE) {
+    return '<tr><td style="font-weight:600">' + label + '</td><td>' + vD + '</td><td>' + vE + '</td></tr>';
+  }
+
+  let html = '';
+  html += row('\u4ea4\u6613\u6578', s2a.length, s2b.length);
+  html += row('\u52dd\u7387', wrD + '%', wrE + '%');
+  html += row('\u5e73\u5747 pts', fmtP(pD.total/s2a.length), fmtP(pE.total/s2b.length));
+  html += row('\u5efa\u8b70\u4fdd\u8b49\u91d1', '$7,200 / \u53e3\uff08\u6a19\u6e96\uff09<br><span style="font-size:11px;color:var(--muted)">$1,440 / \u53e3\uff08\u5fae\u578b\uff09</span>', '$9,100 / \u53e3\uff08\u6a19\u6e96\uff09<br><span style="font-size:11px;color:var(--muted)">$1,820 / \u53e3\uff08\u5fae\u578b\uff09</span>');
+  document.getElementById('s2_perf').innerHTML = html;
+})();
+
+// Keep chartTick/chartGrid/chartText for combo and corr charts below
+/* bar charts removed — replaced by perf summary tables above */
+
+// ===== COMBO COMPARE TABLE =====
+const s2aMap = {};
+s2a.forEach(t => { s2aMap[t.y] = t; });
+
+(function() {
+  const cotHedgeSkip = new Set([2001, 2005, 2010, 2012, 2015, 2017, 2020, 2023, 2024, 2025]);
+  const cotSpecSkip = new Set([2001, 2015, 2017, 2020, 2023, 2024, 2025]);
+  const s2bMap = {}; s2b.forEach(t => { s2bMap[t.y] = t; });
+
+  function comboStats(shortFilter, longMap) {
+    let total = 0, wins = 0, n = 0;
+    for (let y = 2000; y <= 2025; y++) {
+      const st = s1.find(t => t.y === y);
+      const sp = (st && shortFilter(st, y)) ? pts(st.pnl) : null;
+      const lt = longMap[y];
+      const lp = lt ? pts(lt.pnl) : null;
+      if (sp === null && lp === null) continue;
+      const yp = (sp || 0) + (lp || 0);
+      total += yp; n++; if (yp > 0) wins++;
+    }
+    return { n: n, avg: (total / n), wr: (wins / n * 100).toFixed(1) };
+  }
+
+  const fA = (st, y) => !st.skip;
+  const fB = (st, y) => !st.skip && !cotHedgeSkip.has(y);
+  const fC = (st, y) => !st.skip && !cotSpecSkip.has(y);
+
+  const ad = comboStats(fA, s2aMap);
+  const ae = comboStats(fA, s2bMap);
+  const bd = comboStats(fB, s2aMap);
+  const be = comboStats(fB, s2bMap);
+  const cd = comboStats(fC, s2aMap);
+  const ce = comboStats(fC, s2bMap);
+
+  function crow(cls, name, c) {
+    return '<tr><td style="font-weight:600" class="' + cls + '">' + name + '</td><td>' + c.n + '</td><td>' + fmtP(c.avg) + '</td><td>' + c.wr + '%</td>';
+  }
+  const mD = '$7,200 / \u53e3\uff08\u6a19\u6e96\uff09<br><span style="font-size:11px;color:var(--muted)">$1,440 / \u53e3\uff08\u5fae\u578b\uff09</span>';
+  const mE = '$9,100 / \u53e3\uff08\u6a19\u6e96\uff09<br><span style="font-size:11px;color:var(--muted)">$1,820 / \u53e3\uff08\u5fae\u578b\uff09</span>';
+  let h = '';
+  h += crow('green', 'A + D\uff08\u505a\u7a7a\u4e7e\u65f1 + \u505a\u591a\u7cbe\u6e96\uff09', ad) + '<td>' + mD + '</td></tr>';
+  h += crow('blue', 'A + E\uff08\u505a\u7a7a\u4e7e\u65f1 + \u505a\u591a\u6db5\u84cb\uff09', ae) + '<td>' + mE + '</td></tr>';
+  h += crow('purple', 'B + D\uff08\u505a\u7a7aCOT\u907f\u96aa\u5009 + \u505a\u591a\u7cbe\u6e96\uff09', bd) + '<td>' + mD + '</td></tr>';
+  h += crow('cyan', 'B + E\uff08\u505a\u7a7aCOT\u907f\u96aa\u5009 + \u505a\u591a\u6db5\u84cb\uff09', be) + '<td>' + mE + '</td></tr>';
+  h += crow('amber', 'C + D\uff08\u505a\u7a7aCOT\u6295\u6a5f\u5009 + \u505a\u591a\u7cbe\u6e96\uff09', cd) + '<td>' + mD + '</td></tr>';
+  h += crow('', 'C + E\uff08\u505a\u7a7aCOT\u6295\u6a5f\u5009 + \u505a\u591a\u6db5\u84cb\uff09', ce) + '<td>' + mE + '</td></tr>';
+  document.getElementById('combo_compare').innerHTML = h;
+})();
+
+// ===== CORRELATION BAR CHART =====
+</script>
+</body>
+</html>
+      
