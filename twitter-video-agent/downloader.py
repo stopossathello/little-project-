@@ -115,12 +115,14 @@ def _entries(info: dict) -> list[dict]:
     return [info]
 
 
-def _pick(entries: list[dict], index: int | None) -> list[dict]:
+def _pick(entries: list[dict], index: int | None) -> list[tuple[int, dict]]:
+    """回傳 (第幾支, 影片資料)，編號從 1 開始。"""
+    numbered = list(enumerate(entries, 1))
     if index is None:
-        return entries
+        return numbered
     if not 1 <= index <= len(entries):
         raise TweetVideoError(f"這則推文只有 {len(entries)} 支影片，沒有第 {index} 支")
-    return [entries[index - 1]]
+    return [numbered[index - 1]]
 
 
 def _extract(ydl: yt_dlp.YoutubeDL, ref: TweetRef) -> dict:
@@ -195,7 +197,7 @@ def download_tweet(
     results = []
     with yt_dlp.YoutubeDL(params) as ydl:
         info = _extract(ydl, ref)
-        for entry in _pick(_entries(info), index):
+        for number, entry in _pick(_entries(info), index):
             try:
                 done = ydl.process_ie_result(entry, download=True)
             except DownloadError as exc:
@@ -206,6 +208,9 @@ def download_tweet(
                     continue
                 results.append({
                     "file": str(path.resolve()),
+                    "index": number,
+                    "uploader_id": done.get("uploader_id"),
+                    "width": None if audio_only else done.get("width"),
                     "height": None if audio_only else done.get("height"),
                     "duration_sec": round(done["duration"], 1) if done.get("duration") else None,
                     "size_mb": round(path.stat().st_size / 1_048_576, 2),

@@ -48,6 +48,45 @@ python downloader.py https://x.com/user/status/123 --audio-only                 
 python downloader.py https://x.com/user/status/123 --info                           # 只看資訊不下載
 ```
 
+### Telegram bot（傳連結給 bot，影片自動傳回來）
+
+不需要 Anthropic API key。bot 跑在你的電腦上，電腦開著 bot 才會回應。
+
+1. 在 Telegram 找 **@BotFather**，傳 `/newbot`，照指示取名，拿到 token（長得像 `123456789:AAH...`）。
+2. 先只設定 token 啟動 bot：
+
+   ```bash
+   # macOS
+   export TELEGRAM_BOT_TOKEN=123456789:AAH...
+   python3 telegram_bot.py
+
+   # Windows PowerShell
+   $env:TELEGRAM_BOT_TOKEN="123456789:AAH..."
+   python telegram_bot.py
+   ```
+
+3. 在 Telegram 打開你的 bot，傳 `/start`，它會回覆你的 user ID。
+4. 按 Ctrl+C 停掉 bot，加上 user ID 再啟動。之後只有這個帳號能使用：
+
+   ```bash
+   export TELEGRAM_ALLOWED_USERS=你的user ID        # 多人用逗號分隔
+   python3 telegram_bot.py
+   ```
+
+5. 把推文連結傳給 bot，影片會直接傳回聊天室。從 X App 按「分享 → 複製連結」貼上即可，一則訊息可以貼多個連結。
+
+訊息裡可以加的指示：
+
+| 寫法 | 效果 |
+|---|---|
+| `720p` | 畫質上限 720p |
+| `音訊` 或 `聲音` | 只抓聲音，傳 m4a |
+| 網址結尾 `/video/2` | 推文有多支影片時只抓第 2 支 |
+
+Telegram 限制 bot 上傳的檔案不能超過 50 MB。影片超過時，bot 會自動改抓較低畫質，並在聊天室說明。最低畫質還是超過時，檔案會存在電腦的 `downloads/` 資料夾，聊天室會回報路徑。其他檔案上傳完就刪除，不佔電腦空間。
+
+bot 的參數：`--max-height 720`（預設畫質上限），以及下方的 `--cookies-from-browser` 等共用參數。
+
 ### 共用參數
 
 | 參數 | 說明 |
@@ -77,5 +116,5 @@ python downloader.py https://x.com/user/status/123 --info                       
 ## 測試
 
 ```bash
-python -m unittest test_downloader
+python -m unittest test_downloader test_telegram_bot
 ```
