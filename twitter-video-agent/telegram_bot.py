@@ -1,8 +1,10 @@
 """Telegram bot：把推文連結傳給 bot，它下載影片後傳回聊天室。
 
-    export TELEGRAM_BOT_TOKEN=123456789:AA...
-    export TELEGRAM_ALLOWED_USERS=你的 user ID（多個用逗號分隔）
-    python telegram_bot.py
+    python telegram_bot.py            # 第一次執行會引導設定 token 和你的帳號
+    python telegram_bot.py --setup    # 重新設定
+
+設定存在同一個資料夾的 bot.env，也可以用環境變數 TELEGRAM_BOT_TOKEN、
+TELEGRAM_ALLOWED_USERS（多個 user ID 用逗號分隔）指定，環境變數優先。
 
 訊息裡可以加「720p」限制畫質，加「音訊」只抓聲音。
 """
@@ -20,14 +22,16 @@ import tempfile
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-from telegram import LinkPreviewOptions, Message, MessageEntity, Update
+from telegram import Bot, LinkPreviewOptions, Message, MessageEntity, Update, User
 from telegram.constants import ChatAction
-from telegram.error import TelegramError
+from telegram.error import InvalidToken, TelegramError
 from telegram.ext import Application, CommandHandler, ContextTypes, Defaults, MessageHandler, filters
 
 import downloader as dl
 
 log = logging.getLogger("telegram_bot")
+
+SETTINGS_FILE = Path(__file__).with_name("bot.env")
 
 # 檔案超過上傳上限時，依序改抓這些畫質
 FALLBACK_HEIGHTS = [720, 540, 480, 360, 240]
@@ -236,6 +240,69 @@ def _parse_user_ids(raw: str) -> frozenset[int]:
     return frozenset(ids)
 
 
+def load_settings(path: Path = SETTINGS_FILE) -> None:
+    """讀 bot.env（一行一個 KEY=VALUE）。已經設定的環境變數優先。"""
+    if not path.is_file():
+        return
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
+        key, sep, value = line.partition("=")
+        if sep and not key.strip().startswith("#"):
+            os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
+
+
+async def _wait_for_owner(bot: Bot) -> User:
+    """等使用者傳訊息給 bot，確認是本人後回傳該帳號。"""
+    offset = None
+    while True:
+        for update in await bot.get_updates(offset=offset, timeout=20):
+            offset = update.update_id + 1
+            user = update.effective_user
+            if user is None or user.is_bot:
+                continue
+            name = user.full_name + (f"（@{user.username}）" if user.username else "")
+            answer = await asyncio.to_thread(input, f"收到 {name} 的訊息，user ID 是 {user.id}。這是你本人嗎？(y/n) ")
+            if answer.strip().lower() in ("y", "yes", "是"):
+                # 標記為已處理，正式啟動後不會再回覆這則訊息
+                await bot.get_updates(offset=offset, timeout=0)
+                return user
+            print("繼續等待下一則訊息…")
+
+
+def run_setup(base_url: str | None) -> tuple[str, int] | None:
+    """在終端機一步步設定 token 和可以使用的帳號，存進 bot.env。"""
+    print("設定 Telegram bot（隨時可以按 Ctrl+C 取消）\n")
+    print("第 1 步：在 Telegram 搜尋 @BotFather，傳 /newbot，照指示幫 bot 取名，最後會拿到一串 token。")
+    token = input("把 token 貼在這裡，按 Enter：").strip()
+
+    async def connect() -> User:
+        bot = Bot(token, base_url=base_url) if base_url else Bot(token)
+        async with bot:
+            print(f"\n已連上你的 bot：@{bot.username}")
+            print(f"第 2 步：用 Telegram 打開 https://t.me/{bot.username} ，按「開始」或隨便傳一則訊息。")
+            print("等待訊息中…")
+            return await _wait_for_owner(bot)
+
+    try:
+        owner = asyncio.run(connect())
+    except InvalidToken:
+        print("token 不正確，請確認有從 BotFather 完整複製（格式像 123456789:AAH...）。", file=sys.stderr)
+        return None
+    except TelegramError as exc:
+        print(f"連不上 Telegram：{exc}", file=sys.stderr)
+        return None
+    except (KeyboardInterrupt, EOFError):
+        print("\n已取消設定。", file=sys.stderr)
+        return None
+
+    SETTINGS_FILE.write_text(
+        "# Telegram bot 設定，裡面有 token，不要傳給別人\n"
+        f"TELEGRAM_BOT_TOKEN={token}\nTELEGRAM_ALLOWED_USERS={owner.id}\n",
+        encoding="utf-8",
+    )
+    print(f"\n設定完成，已存到 {SETTINGS_FILE}\n之後只有 {owner.full_name} 這個帳號能使用 bot。\n")
+    return token, owner.id
+
+
 def build_application(token: str, config: BotConfig, base_url: str | None = None) -> Application:
     builder = (
         Application.builder()
@@ -259,16 +326,26 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--max-height", type=int, help="預設畫質上限，訊息裡寫的畫質優先")
     parser.add_argument("--upload-limit-mb", type=float, default=50,
                         help="單一檔案上傳上限，Telegram 官方 Bot API 是 50 MB")
+    parser.add_argument("--setup", action="store_true", help="重新設定 token 和可以使用的帳號")
     dl.add_cookie_args(parser)
     args = parser.parse_args(argv)
+    base_url = os.environ.get("TELEGRAM_API_BASE_URL")
+
+    load_settings()
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    if args.setup or (not token and sys.stdin.isatty()):
+        result = run_setup(base_url)
+        if result is None:
+            return 1
+        token = os.environ["TELEGRAM_BOT_TOKEN"] = result[0]
+        os.environ["TELEGRAM_ALLOWED_USERS"] = str(result[1])
+    if not token:
+        print("找不到 token。請執行 python telegram_bot.py --setup，或設定 TELEGRAM_BOT_TOKEN。", file=sys.stderr)
+        return 1
 
     logging.basicConfig(format="%(asctime)s %(levelname)s %(message)s", level=logging.INFO)
     logging.getLogger("httpx").setLevel(logging.WARNING)
 
-    token = os.environ.get("TELEGRAM_BOT_TOKEN")
-    if not token:
-        print("請先設定 TELEGRAM_BOT_TOKEN（向 @BotFather 申請）。", file=sys.stderr)
-        return 1
     allowed = _parse_user_ids(os.environ.get("TELEGRAM_ALLOWED_USERS", ""))
     if not allowed:
         log.warning("沒有設定 TELEGRAM_ALLOWED_USERS，所有人都無法下載。傳訊息給 bot 會回覆你的 user ID。")
@@ -279,8 +356,8 @@ def main(argv: list[str] | None = None) -> int:
         max_height=args.max_height,
         upload_limit_mb=args.upload_limit_mb,
     )
-    app = build_application(token, config, os.environ.get("TELEGRAM_API_BASE_URL"))
-    log.info("bot 已啟動，按 Ctrl+C 停止")
+    app = build_application(token, config, base_url)
+    log.info("bot 已啟動。這個視窗要保持開著，按 Ctrl+C 停止")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
     return 0
 

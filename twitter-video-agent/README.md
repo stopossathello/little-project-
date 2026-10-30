@@ -4,12 +4,12 @@
 
 ## 安裝
 
-需要 Python 3.10 以上和 ffmpeg（合併影音、轉音訊用）。
+需要 Python 3.10 以上。ffmpeg 可裝可不裝：沒有 ffmpeg 一樣能抓有聲音的 mp4，只有「只抓聲音」需要它。
 
 ```bash
 cd twitter-video-agent
 pip install -r requirements.txt
-# macOS: brew install ffmpeg / Ubuntu: sudo apt install ffmpeg / Windows: winget install ffmpeg
+# 選用：macOS: brew install ffmpeg / Ubuntu: sudo apt install ffmpeg / Windows: winget install Gyan.FFmpeg
 ```
 
 agent 模式需要 Anthropic API key：
@@ -50,30 +50,28 @@ python downloader.py https://x.com/user/status/123 --info                       
 
 ### Telegram bot（傳連結給 bot，影片自動傳回來）
 
-不需要 Anthropic API key。bot 跑在你的電腦上，電腦開著 bot 才會回應。
+不需要 Anthropic API key。bot 跑在你的電腦上，電腦開著、bot 視窗開著才會回應。
 
-1. 在 Telegram 找 **@BotFather**，傳 `/newbot`，照指示取名，拿到 token（長得像 `123456789:AAH...`）。
-2. 先只設定 token 啟動 bot：
+**Windows 第一次設定**
 
-   ```bash
-   # macOS
-   export TELEGRAM_BOT_TOKEN=123456789:AAH...
-   python3 telegram_bot.py
+1. 安裝 Python：到 https://www.python.org/downloads/ 下載，安裝畫面第一頁勾選 **Add python.exe to PATH** 再按 Install Now。
+2. 下載程式：打開 https://github.com/stopossathello/little-project-/archive/refs/heads/claude/twitter-video-agent.zip ，解壓縮後進入 `twitter-video-agent` 資料夾。
+3. 在 Telegram 搜尋 **@BotFather**，傳 `/newbot`，照指示幫 bot 取名字和帳號（帳號要以 `bot` 結尾），最後會拿到一串 token，長得像 `123456789:AAH...`。
+4. 雙擊 `start_bot.bat`。第一次會自動安裝套件，接著要你貼上 token（在黑色視窗按滑鼠右鍵就是貼上）。
+5. 視窗顯示 bot 的連結後，用 Telegram 打開它按「開始」。視窗會問「這是你本人嗎？」，輸入 `y` 按 Enter。
+6. 看到「bot 已啟動」就完成了，視窗保持開著即可。設定存在 `bot.env`，之後雙擊 `start_bot.bat` 會直接啟動。
 
-   # Windows PowerShell
-   $env:TELEGRAM_BOT_TOKEN="123456789:AAH..."
-   python telegram_bot.py
-   ```
+**macOS / Linux**：在終端機進入資料夾，執行 `pip3 install -r requirements.txt` 再執行 `python3 telegram_bot.py`，設定流程相同。
 
-3. 在 Telegram 打開你的 bot，傳 `/start`，它會回覆你的 user ID。
-4. 按 Ctrl+C 停掉 bot，加上 user ID 再啟動。之後只有這個帳號能使用：
+**使用**：把推文連結傳給 bot，影片會直接傳回聊天室。從 X App 按「分享」再「複製連結」貼上即可，一則訊息可以貼多個連結。
 
-   ```bash
-   export TELEGRAM_ALLOWED_USERS=你的user ID        # 多人用逗號分隔
-   python3 telegram_bot.py
-   ```
+**開機自動啟動（Windows）**
 
-5. 把推文連結傳給 bot，影片會直接傳回聊天室。從 X App 按「分享 → 複製連結」貼上即可，一則訊息可以貼多個連結。
+1. 按 `Win + R`，輸入 `shell:startup` 按 Enter，會打開「啟動」資料夾。
+2. 在 `start_bot.bat` 按右鍵，選「顯示其他選項」再選「建立捷徑」，把捷徑拖進「啟動」資料夾。
+3. 到「設定 → 系統 → 電源」，把接上電源時的睡眠設成「永不」，否則電腦睡著後 bot 就不會回應。
+
+要換 token 或換帳號：執行 `start_bot.bat --setup`，或刪掉 `bot.env` 再雙擊 `start_bot.bat`。也可以改用環境變數 `TELEGRAM_BOT_TOKEN`、`TELEGRAM_ALLOWED_USERS`（多個 user ID 用逗號分隔）。
 
 訊息裡可以加的指示：
 

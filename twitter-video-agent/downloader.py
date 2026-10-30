@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -182,13 +183,18 @@ def download_tweet(
     index = video_index if video_index is not None else ref.index
     opts.out_dir.mkdir(parents=True, exist_ok=True)
 
+    has_ffmpeg = shutil.which("ffmpeg") is not None
+    if audio_only and not has_ffmpeg:
+        raise TweetVideoError("只抓聲音需要先安裝 ffmpeg")
+
     template = AUDIO_OUTPUT_TEMPLATE if audio_only else OUTPUT_TEMPLATE
     params = _base_params(opts) | {"outtmpl": str(opts.out_dir / template)}
     if audio_only:
         params["format"] = "bestaudio/best"
         params["postprocessors"] = [{"key": "FFmpegExtractAudio", "preferredcodec": "m4a"}]
     else:
-        params["format"] = "bv*+ba/b"
+        # 沒有 ffmpeg 時只選影音合在一起的單一檔案，X 的 mp4 本身就有聲音
+        params["format"] = "bv*+ba/b" if has_ffmpeg else "b"
         params["merge_output_format"] = "mp4"
         if max_height:
             # 選不超過 max_height 的最高畫質；全部都超過時選最接近的
